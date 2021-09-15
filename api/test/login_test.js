@@ -1,12 +1,13 @@
-const page = require('../page/login_page.js');
-
-const env = require('dotenv').config();
-const chai = require('chai')
+const env = require('dotenv').config()
+const util = require('util')
 const chaiHttp = require('chai-http')
+const chai = require('chai')
 const expect = chai.expect
+chai.use(require('chai-json-schema'))
 chai.use(chaiHttp)
-chai.use(require('chai-json-schema'));
-const addContext = require('mochawesome/addContext');
+const addContext = require('mochawesome/addContext')
+
+const page = require('../page/login_page.js');
 
 var access_token;
 describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
@@ -23,7 +24,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
   const invalid_password = '2118822'
 
   var loginErrorSchema = {
-    // "type": "object",
+    "type": "object",
     "required": [
       "status_code",
       "error",
@@ -45,18 +46,21 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
     }
   }
 
+    afterEach(function(){
+      if (this.currentTest.state == 'failed') { 
+          console.log("    * Response Code: " + util.inspect(response.status,{depth: null, colors: true}) + "\n");
+          console.log("    * Response Header: " + util.inspect(response.header,{depth: null, colors: true}) + "\n");
+          console.log("    * Response body: " + util.inspect(response.body,{depth: null, colors: true}) + "\n");
+      }
+    })
+
     it('Login Using Valid Email And Password', async() => {
       const email = process.env.ACCOUNT_HBO_EMAIL
       const password = process.env.ACCOUNT_HBO_PASSWORD
 
-      const response =  await page.loginWithCredentials(app_key, grant_type, scope, email, password).then(res => res)
+      response =  await page.loginWithCredentials(app_key, grant_type, scope, email, password).then(res => res)
 
-      access_token = response.body.access_token
-
-      console.log("Status : " + JSON.stringify(response.status))
-      console.log("Header : " + JSON.stringify(response.header))
-      console.log("Body : " + JSON.stringify(response.body))
-      addContext(this , "response.status" + JSON.stringify(response.status))
+      access_token = response.body.token_type+" "+response.body.access_token
 
       expect(response.status).to.equal(200)
       expect(response.body.access_token).to.not.null
@@ -73,10 +77,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
     it('Login Using invalid Email And Valid Password', async() => {
       const email = process.env.ACCOUNT_KAMAL_EMAIL
       const password = process.env.ACCOUNT_KAMAL_PASSWORD
-      const response =  await page.loginWithCredentials(app_key, grant_type, scope, email, invalid_password).then(res => res)
-      console.log("Status : " + JSON.stringify(response.status))
-      console.log("Header : " + JSON.stringify(response.header))
-      console.log("Body : " + JSON.stringify(response.body))
+      response =  await page.loginWithCredentials(app_key, grant_type, scope, email, invalid_password).then(res => res)
       
       expect(response.status).to.equal(400)
       expect(response.body.status_code).to.equal(400)
@@ -92,10 +93,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
     it('Login Using Valid Email And Invalid Password', async() => {
       const email = process.env.ACCOUNT_CINCIN_EMAIL
       const password = process.env.ACCOUNT_CINCIN_PASSWORD
-      const response =  await page.loginWithCredentials(app_key, grant_type, scope, invalid_email, password).then(res => res)
-      console.log("Status : " + JSON.stringify(response.status))
-      console.log("Header : " + JSON.stringify(response.header))
-      console.log("Body : " + JSON.stringify(response.body))
+      response =  await page.loginWithCredentials(app_key, grant_type, scope, invalid_email, password).then(res => res)
       
       expect(response.status).to.equal(400)
       expect(response.body.status_code).to.equal(400)
@@ -110,10 +108,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
 
     it('Login Using invalid app_key', async() => {
       
-      const response =  await page.loginWithCredentials(invalid_app_key, grant_type, scope, email, password).then(res => res)
-      console.log("Status : " + JSON.stringify(response.status))
-      console.log("Header : " + JSON.stringify(response.header))
-      console.log("Body : " + JSON.stringify(response.body))
+      response =  await page.loginWithCredentials(invalid_app_key, grant_type, scope, email, password).then(res => res)
       
       expect(response.status).to.equal(400)
       expect(response.body.status_code).to.equal(400)
@@ -128,10 +123,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
 
     it('Login Using invalid grand_type', async() => {
       
-      const response =  await page.loginWithCredentials(app_key, invalid_grand_type, scope, email, password).then(res => res)
-      console.log("Status : " + JSON.stringify(response.status))
-      console.log("Header : " + JSON.stringify(response.header))
-      console.log("Body : " + JSON.stringify(response.body))
+      response =  await page.loginWithCredentials(app_key, invalid_grand_type, scope, email, password).then(res => res)
       
       expect(response.status).to.equal(400)
       expect(response.body.status_code).to.equal(400)
@@ -146,10 +138,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
 
     it('Login Using invalid scope', async() => {
       
-      const response =  await page.loginWithCredentials(app_key, grant_type, invalid_scope, email, password).then(res => res)
-      console.log("Status : " + JSON.stringify(response.status))
-      console.log("Header : " + JSON.stringify(response.header))
-      console.log("Body : " + JSON.stringify(response.body))
+      response =  await page.loginWithCredentials(app_key, grant_type, invalid_scope, email, password).then(res => res)
       
       expect(response.status).to.equal(400)
       expect(response.body.status_code).to.equal(400)
@@ -163,12 +152,9 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
     }),
 
     it('Login Error Schema Validation', async() => {  
-      const response =  await page.loginWithCredentials(app_key, grant_type, scope, email, invalid_password).then(res => res)
-      console.log("Status : " + JSON.stringify(response.status))
-      console.log("Header : " + JSON.stringify(response.header))
-      console.log("Body : " + JSON.stringify(response.body))
+      response =  await page.loginWithCredentials(app_key, grant_type, scope, email, invalid_password).then(res => res)
       
-      expect(response.status).to.be.jsonSchema(loginErrorSchema)
+      expect(response.body).to.be.jsonSchema(loginErrorSchema)
     })
 
   })
