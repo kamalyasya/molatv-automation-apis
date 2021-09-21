@@ -1,7 +1,4 @@
 const page = require('../page/login_page.js');
-// import { access_token } from './login_test'
-var { access_token } = require('./login_test.js')
-
 
 const env = require('dotenv').config();
 const chai = require('chai')
