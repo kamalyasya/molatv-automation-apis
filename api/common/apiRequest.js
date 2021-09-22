@@ -24,6 +24,13 @@ const getProfile = (access_token) => {
     .set('Authorization', access_token)
 }
 
+const updateProfile = (access_token, payload) => {
+  chai.request(process.env.HOST)
+    .patch('/accounts/_/v2/profile')
+    .set('Authorization', access_token)
+    .send(payload)
+}
+
 // device
 const addDevice = (access_token, userId) =>
   chai.request(process.env.HOST)
