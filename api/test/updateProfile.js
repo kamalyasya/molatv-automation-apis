@@ -11,7 +11,7 @@ const { test } = require('../common/getToken');
 const expect = chai.expect
 
 describe('Update Profile - [PATCH] /accounts/_/v2/profile', () => {
-  let cek
+    let response
 
   afterEach(function(){
     if (this.currentTest.state == 'failed') { 

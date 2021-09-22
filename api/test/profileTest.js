@@ -6,12 +6,12 @@ chai.use(require('chai-json-schema'))
 chai.use(chaiHttp)
 
 const { getProfile } = require('../common/apiRequest');
-const { test } = require('../common/getToken');
+const { getToken } = require('../common/getToken');
 
 const expect = chai.expect
 
 describe('Get Profile - [GET] /accounts/_/v2/profile', () => {
-  let cek
+  let response
 
   afterEach(function(){
     if (this.currentTest.state == 'failed') { 
@@ -22,11 +22,11 @@ describe('Get Profile - [GET] /accounts/_/v2/profile', () => {
   })
 
   it('User can get profile', async() => {
-    const cek = await test
-    cek.token = 'Bearer ' + cek.token
+    const auth = await getToken
+    auth.token = 'Bearer ' + auth.token
 
-    response =  await getProfile(cek.token)
-    
+    response =  await getProfile(auth.token)
+        
     expect(response.status).to.equal(200)
     expect(response.body.data.birthdate).to.equal('01022002')
     expect(response.body.data.type).to.be.a("string")

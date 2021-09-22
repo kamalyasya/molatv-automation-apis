@@ -12,6 +12,7 @@ const getToken = (async() => {
   const getToken = async () => {
     const response = await loginWithCredentials(api_key, grant_type, scope, email, password)
     token = response.body.access_token
+    console.log('ini token =>',token)
     return token
   }
 
