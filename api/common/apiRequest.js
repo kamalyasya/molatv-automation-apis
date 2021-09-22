@@ -15,6 +15,7 @@ const loginWithCredentials = (app_key, grant_type, scope, email, password) => {
       "email": email,
       "password": password
     })
+    
 }
 
 // profile
@@ -55,11 +56,64 @@ const checkGeoguard = (video_id) =>
 chai.request(process.env.HOST)
     .get('/api/v2/videos/geoguard/check/'+video_id)
 
+//PIN
+const getInfoPin = (access_token) => {
+  return chai.request(process.env.HOST)
+    .get('/api/v2/userdata/pin/info')
+    .set('Authorization', access_token)
+}
+
+const setPin = (access_token, payload) => {
+  return chai.request(process.env.HOST)
+    .post('/api/v2/userdata/setPin')
+    .set('Content-Type', 'application/json')
+    .set('Authorization', access_token)
+    .send(payload)
+}
+
+const changePin = (access_token, payload) => {
+  return chai.request(process.env.HOST)
+    .post('/api/v2/userdata/changePin')
+    .set('Content-Type', 'application/json')
+    .set('Authorization', access_token)
+    .send(payload)
+}
+
+const checkPin = (access_token, payload) => {
+  return chai.request(process.env.HOST)
+    .post('/api/v2/userdata/checkPin')
+    .set('Content-Type', 'application/json')
+    .set('Authorization', access_token)
+    .send(payload)
+}
+
+const forgotPin = (access_token, payload) => {
+  return chai.request(process.env.HOST)
+    .post('/api/v2/userdata/forgotPin')
+    .set('Content-Type', 'application/json')
+    .set('Authorization', access_token)
+    .send(payload)
+}
+
+const resetPin = (access_token, payload) => {
+  return chai.request(process.env.HOST)
+    .post('/api/v2/userdata/resetPin')
+    .set('Content-Type', 'application/json')
+    .set('Authorization', access_token)
+    .send(payload)
+}
+
 module.exports = {
   loginWithCredentials,
   getProfile,
   addDevice,
   getPlaylistRoot,
   getPlaylistByLanguage,
-  checkGeoguard
+  checkGeoguard,
+  setPin,
+  getInfoPin,
+  changePin,
+  checkPin,
+  forgotPin,
+  resetPin
 }
