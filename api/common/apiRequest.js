@@ -19,13 +19,14 @@ const loginWithCredentials = (app_key, grant_type, scope, email, password) => {
 
 // profile
 const getProfile = (access_token) => {
-  chai.request(process.env.HOST)
+  console.log('masuk cui', access_token)
+  return chai.request(process.env.HOST)
     .get('/accounts/_/v2/profile')
     .set('Authorization', access_token)
 }
 
 // device
-const addDevice = (userId) => {
+const addDevice = (user_id) => {
   chai.request(process.env.HOST)
     .get('/api/v2/videos/drm/add-device')
     .set('Authorization', access_token)
