@@ -25,6 +25,13 @@ const getProfile = (access_token) => {
     .set('Authorization', access_token)
 }
 
+const updateProfile = (access_token, payload) => {
+  chai.request(process.env.HOST)
+    .patch('/accounts/_/v2/profile')
+    .set('Authorization', access_token)
+    .send(payload)
+}
+
 // device
 const addDevice = (user_id) => {
   chai.request(process.env.HOST)
@@ -32,7 +39,7 @@ const addDevice = (user_id) => {
     .set('Authorization', access_token)
     .query({deviceId: userId, test: 1})
 }
-  
+
 module.exports = {
   loginWithCredentials,
   getProfile,

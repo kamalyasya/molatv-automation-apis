@@ -68,6 +68,28 @@ describe('parental control', () => {
     it('case 2')
     it('case 3')
   })
+
+  describe('Get Profile - [GET] /accounts/_/v2/profile', () => {
+    it('User can get profile', async() => {
+      const cek = await test
+      cek.token = 'Bearer ' + cek.token
+  
+      response =  await getProfile(cek.token)
+      
+      expect(response.status).to.equal(200)
+      expect(response.body.data.birthdate).to.equal('01022002')
+      expect(response.body.data.type).to.be.a("string")
+  
+      expect(response.body.data.id).to.equal(1)
+      expect(response.body.data.id).to.be.a("number")
+  
+      expect(response.body.data.attributes.vuid).to.not.null
+      expect(response.body.data.attributes.vuid).to.be.a("string")
+  
+      expect(response.body).to.be.jsonSchema(expectJsonSchema)
+    })
+  })
+
 })
 
 describe('/subscriptions', () => {
