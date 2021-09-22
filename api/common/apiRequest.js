@@ -25,15 +25,34 @@ const getProfile = (access_token) => {
 }
 
 // device
-const addDevice = (userId) => {
+const addDevice = (access_token, userId) =>
   chai.request(process.env.HOST)
     .get('/api/v2/videos/drm/add-device')
     .set('Authorization', access_token)
     .query({deviceId: userId, test: 1})
-}
-  
+
+// Playlist Root
+const getPlaylistRoot = (platform_id) =>
+chai.request(process.env.HOST)
+    .get('/api/v2/videos/playlists-root')
+    .query({platformId: platform_id})
+
+// Playlist Data by Playlist_id and Language
+const getPlaylistByLanguage = (playlist_id, language) =>
+chai.request(process.env.HOST)
+    .get('/api/v2/videos/playlists/' + playlist_id)
+    .query({language: language})
+
+// Geoguard
+const checkGeoguard = (video_id) =>
+chai.request(process.env.HOST)
+    .get('/api/v2/videos/geoguard/check/'+video_id)
+
 module.exports = {
   loginWithCredentials,
   getProfile,
-  addDevice
+  addDevice,
+  getPlaylistRoot,
+  getPlaylistByLanguage,
+  checkGeoguard
 }

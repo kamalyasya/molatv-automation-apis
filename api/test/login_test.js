@@ -75,7 +75,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
   it('Login Using invalid Email And Valid Password', async() => {
     const email = process.env.ACCOUNT_KAMAL_EMAIL
     const password = process.env.ACCOUNT_KAMAL_PASSWORD
-    response =  await page.loginWithCredentials(app_key, grant_type, scope, email, invalid_password).then(res => res)
+    response =  await loginWithCredentials(app_key, grant_type, scope, email, invalid_password).then(res => res)
     
     expect(response.status).to.equal(400)
     expect(response.body.status_code).to.equal(400)
@@ -91,7 +91,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
   it('Login Using Valid Email And Invalid Password', async() => {
     const email = process.env.ACCOUNT_CINCIN_EMAIL
     const password = process.env.ACCOUNT_CINCIN_PASSWORD
-    response =  await page.loginWithCredentials(app_key, grant_type, scope, invalid_email, password).then(res => res)
+    response =  await loginWithCredentials(app_key, grant_type, scope, invalid_email, password).then(res => res)
     
     expect(response.status).to.equal(400)
     expect(response.body.status_code).to.equal(400)
@@ -106,7 +106,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
 
   it('Login Using invalid app_key', async() => {
     
-    response =  await page.loginWithCredentials(invalid_app_key, grant_type, scope, email, password).then(res => res)
+    response =  await loginWithCredentials(invalid_app_key, grant_type, scope, email, password).then(res => res)
     
     expect(response.status).to.equal(400)
     expect(response.body.status_code).to.equal(400)
@@ -121,7 +121,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
 
   it('Login Using invalid grand_type', async() => {
     
-    response =  await page.loginWithCredentials(app_key, invalid_grand_type, scope, email, password).then(res => res)
+    response =  await loginWithCredentials(app_key, invalid_grand_type, scope, email, password).then(res => res)
     
     expect(response.status).to.equal(400)
     expect(response.body.status_code).to.equal(400)
@@ -136,7 +136,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
 
   it('Login Using invalid scope', async() => {
     
-    response =  await page.loginWithCredentials(app_key, grant_type, invalid_scope, email, password).then(res => res)
+    response =  await loginWithCredentials(app_key, grant_type, invalid_scope, email, password).then(res => res)
     
     expect(response.status).to.equal(400)
     expect(response.body.status_code).to.equal(400)
@@ -150,7 +150,7 @@ describe('Login - [POST] /accounts/_/oauth2/v1/token', () => {
   }),
 
   it('Login Error Schema Validation', async() => {  
-    response =  await page.loginWithCredentials(app_key, grant_type, scope, email, invalid_password).then(res => res)
+    response =  await loginWithCredentials(app_key, grant_type, scope, email, invalid_password).then(res => res)
     
     expect(response.body).to.be.jsonSchema(loginErrorSchema)
   })

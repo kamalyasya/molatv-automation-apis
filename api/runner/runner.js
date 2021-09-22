@@ -1,4 +1,4 @@
-// require('../test/login_test.js')
-// require('../test/add_device_test.js')
-// require('../test/videos_test.js')
-require('../test/profile_test.js')
+require('../test/login_test')
+require('../test/multiCountryCatalog/geoguardCheck')
+require('../test/multiCountryCatalog/playlistRoot')
+require('../test/multiCountryCatalog/playlistIdByLanguage')
