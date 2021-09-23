@@ -3,3 +3,4 @@
 /reports/
 package-lock.json
 .env
+token.json
