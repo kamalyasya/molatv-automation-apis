@@ -103,6 +103,39 @@ const resetPin = (access_token, payload) => {
     .send(payload)
 }
 
+// Multi Country Catalog
+const getUserLanguage = () => 
+  chai.request(process.env.HOST)
+    .get('/api/v2/config/languages')
+    .set('Content-Type', 'application/json')
+
+const getUiLanguage = (language, platform_id) => 
+  chai.request(process.env.HOST)
+    .get('/api/v2/config/ui/language/'+language)
+    .set('Content-Type', 'application/json')
+    .query({platformId: platform_id})
+
+const getUserDataPreferencesLanguage = (access_token, boolean_null) => 
+  chai.request(process.env.HOST)
+  .get('/api/v2/userdata/preferences/user-language')
+  .set('Content-Type', 'application/json')
+  .set('Authorization', access_token)
+  .query({null: boolean_null})
+
+// Subscriptions
+const getSubscriptionsPackageByPlatformId = (platform_id) => 
+  chai.request(process.env.HOST)
+  .get('/api/v2/subscriptions/subscriptions')
+  .set('Content-Type', 'application/json')
+  .query({platformId: platform_id})
+
+// app-params
+const getAppParamsByPlatformId = (platform_id) => 
+  chai.request(process.env.HOST)
+  .get('/api/v2/config/app-params')
+  .set('Content-Type', 'application/json')
+  .query({platformId: platform_id})
+
 module.exports = {
   loginWithCredentials,
   getProfile,
@@ -115,5 +148,10 @@ module.exports = {
   changePin,
   checkPin,
   forgotPin,
-  resetPin
+  resetPin,
+  getUserLanguage,
+  getUiLanguage,
+  getUserDataPreferencesLanguage,
+  getSubscriptionsPackageByPlatformId,
+  getAppParamsByPlatformId
 }
