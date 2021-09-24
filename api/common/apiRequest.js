@@ -15,7 +15,6 @@ const loginWithCredentials = (app_key, grant_type, scope, email, password) => {
       "email": email,
       "password": password
     })
-    
 }
 
 // profile
@@ -57,51 +56,10 @@ chai.request(process.env.HOST)
     .get('/api/v2/videos/geoguard/check/'+video_id)
 
 //PIN
-const getInfoPin = (access_token) => {
-  return chai.request(process.env.HOST)
+const getInfoPin = (access_token) => 
+  chai.request(process.env.HOST)
     .get('/api/v2/userdata/pin/info')
     .set('Authorization', access_token)
-}
-
-const setPin = (access_token, payload) => {
-  return chai.request(process.env.HOST)
-    .post('/api/v2/userdata/setPin')
-    .set('Content-Type', 'application/json')
-    .set('Authorization', access_token)
-    .send(payload)
-}
-
-const changePin = (access_token, payload) => {
-  return chai.request(process.env.HOST)
-    .post('/api/v2/userdata/changePin')
-    .set('Content-Type', 'application/json')
-    .set('Authorization', access_token)
-    .send(payload)
-}
-
-const checkPin = (access_token, payload) => {
-  return chai.request(process.env.HOST)
-    .post('/api/v2/userdata/checkPin')
-    .set('Content-Type', 'application/json')
-    .set('Authorization', access_token)
-    .send(payload)
-}
-
-const forgotPin = (access_token, payload) => {
-  return chai.request(process.env.HOST)
-    .post('/api/v2/userdata/forgotPin')
-    .set('Content-Type', 'application/json')
-    .set('Authorization', access_token)
-    .send(payload)
-}
-
-const resetPin = (access_token, payload) => {
-  return chai.request(process.env.HOST)
-    .post('/api/v2/userdata/resetPin')
-    .set('Content-Type', 'application/json')
-    .set('Authorization', access_token)
-    .send(payload)
-}
 
 // Multi Country Catalog
 const getUserLanguage = () => 
@@ -136,6 +94,15 @@ const getAppParamsByPlatformId = (platform_id) =>
   .set('Content-Type', 'application/json')
   .query({platformId: platform_id})
 
+// Main function
+const postMethod = (access_token, payload, path) => 
+  chai.request(process.env.HOST)
+    .post(path)
+    .set('Content-Type', 'application/json')
+    .set('Authorization', access_token)
+    .send(payload)
+
+
 module.exports = {
   loginWithCredentials,
   getProfile,
@@ -143,15 +110,11 @@ module.exports = {
   getPlaylistRoot,
   getPlaylistByLanguage,
   checkGeoguard,
-  setPin,
   getInfoPin,
-  changePin,
-  checkPin,
-  forgotPin,
-  resetPin,
   getUserLanguage,
   getUiLanguage,
   getUserDataPreferencesLanguage,
   getSubscriptionsPackageByPlatformId,
-  getAppParamsByPlatformId
+  getAppParamsByPlatformId,
+  postMethod
 }
