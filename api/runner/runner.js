@@ -11,13 +11,12 @@
 // require('../test/multiLanguageUi/getUserDataPreferences')
 
 // Parental Control
-// require('../test/parentalControl/infoPin')
-// require('../test/parentalControl/setPin')
-// require('../test/parentalControl/checkPin')
-// require('../test/parentalControl/changePin')
-// require('../test/parentalControl/resetPin')
 require('../test/parentalControl/userPin')
+// require('../test/parentalControl/parentalControl')
+
+// Config
+// require('../test/config/configCountryFeatures')
+// require('../test/config/getAppParamsByPlatformId')
 
 // Subscriptions
 // require('../test/subscriptions/getSubscriptionsPackage')
-// require('../test/getAppParamsByPlatformId')

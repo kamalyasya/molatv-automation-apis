@@ -9,7 +9,7 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { getAppParamsByPlatformId } = require('../common/apiRequest');
+const { getAppParamsByPlatformId } = require('../../common/apiRequest');
 
 describe('GET app-params', () => { 
   describe('GET] /api/v2/config/app-params?platformId={platformId}', () => {

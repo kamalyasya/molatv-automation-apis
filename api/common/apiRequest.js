@@ -103,6 +103,17 @@ const postMethod = (access_token, payload, path) =>
     .send(payload)
 
 
+const getMethod = (path) => {
+  return chai.request(process.env.HOST)
+    .get(path)
+}
+
+//Parental Control
+const getParentalControl = () => 
+  chai.request(process.env.HOST)
+    .get('/api/v2/userdata/parental-control')
+
+
 module.exports = {
   loginWithCredentials,
   getProfile,
@@ -116,5 +127,7 @@ module.exports = {
   getUserDataPreferencesLanguage,
   getSubscriptionsPackageByPlatformId,
   getAppParamsByPlatformId,
-  postMethod
+  postMethod,
+  getMethod,
+  getParentalControl
 }
