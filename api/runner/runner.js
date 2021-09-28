@@ -1,4 +1,4 @@
-// require('../test/login_test')
+require('../test/login_test')
 
 // Multi Country Catalog
 // require('../test/multiCountryCatalog/geoguardCheck')
@@ -11,8 +11,9 @@
 // require('../test/multiLanguageUi/getUserDataPreferences')
 
 // Parental Control
-require('../test/parentalControl/userPin')
+// require('../test/parentalControl/userPin')
 // require('../test/parentalControl/parentalControl')
+require('../test/parentalControl/profile')
 
 // Config
 // require('../test/config/configCountryFeatures')
