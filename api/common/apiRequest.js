@@ -26,12 +26,13 @@ const getProfile = (access_token) => {
 
 const Cookie='_csrf='+process.env._csrf
 const x_csrf_token=process.env.x_csrf_token
+
 const updateProfile = (access_token, payload) => 
   chai.request(process.env.HOST)
     .patch('/accounts/_/v2/profile')
     .set('Authorization', access_token)
-    .set('Cookie',Cookie)
-    .set('x-csrf-token',x_csrf_token)
+    .set('Cookie', Cookie)
+    .set('x-csrf-token', x_csrf_token)
     .send(payload)
 
 
