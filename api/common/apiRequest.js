@@ -24,12 +24,17 @@ const getProfile = (access_token) => {
     .set('Authorization', access_token)
 }
 
-const updateProfile = (access_token, payload) => {
+const Cookie='_csrf='+process.env._csrf
+const x_csrf_token=process.env.x_csrf_token
+
+const updateProfile = (access_token, payload) => 
   chai.request(process.env.HOST)
     .patch('/accounts/_/v2/profile')
     .set('Authorization', access_token)
+    .set('Cookie', Cookie)
+    .set('x-csrf-token', x_csrf_token)
     .send(payload)
-}
+
 
 // device
 const addDevice = (access_token, userId) =>
@@ -117,6 +122,7 @@ const getParentalControl = () =>
 module.exports = {
   loginWithCredentials,
   getProfile,
+  updateProfile,
   addDevice,
   getPlaylistRoot,
   getPlaylistByLanguage,
