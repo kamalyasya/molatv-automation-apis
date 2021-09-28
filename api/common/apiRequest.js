@@ -3,6 +3,9 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 chai.use(chaiHttp)
 
+const Cookie  ='_csrf='+process.env._csrf
+const x_csrf_token = process.env.x_csrf_token
+
 // token
 const loginWithCredentials = (app_key, grant_type, scope, email, password) => { 
   return chai.request(process.env.HOST)
@@ -23,9 +26,6 @@ const getProfile = (access_token) => {
     .get('/accounts/_/v2/profile')
     .set('Authorization', access_token)
 }
-
-const Cookie='_csrf='+process.env._csrf
-const x_csrf_token=process.env.x_csrf_token
 
 const updateProfile = (access_token, payload) => 
   chai.request(process.env.HOST)
@@ -118,6 +118,33 @@ const getParentalControl = () =>
   chai.request(process.env.HOST)
     .get('/api/v2/userdata/parental-control')
 
+const getVideoId = (access_token, video_id, language_id) => 
+  chai.request(process.env.HOST)
+  .get('/api/v2/videos/' + video_id)
+  .set('Content-Type', 'application/json')
+  .set('Authorization', access_token)
+  .query({language: language_id})
+
+const signUp = (payload) => 
+  chai.request(process.env.HOST)
+  .post('/api/v2/accounts/signup/email')
+  .set('content-type', 'application/json')
+  .set('x-csrf-token', x_csrf_token)
+  .set('Cookie', Cookie)
+  .send(payload)
+
+const signUpVerify = (payload) => 
+  chai.request(process.env.HOST)
+  .post('/api/v2/accounts/signup/email/verify')
+  .set('content-type', 'application/json')
+  .set('x-csrf-token', x_csrf_token)
+  .set('Cookie', Cookie)
+  .send(payload)
+
+const getCsrfToken = () =>
+  chai.request(process.env.HOST)
+  .get('/accounts/_/v2/__csrf')
+  .set('Content-Type', 'application/json')
 
 module.exports = {
   loginWithCredentials,
@@ -135,5 +162,8 @@ module.exports = {
   getAppParamsByPlatformId,
   postMethod,
   getMethod,
-  getParentalControl
+  getParentalControl,
+  getVideoId,
+  signUp,
+  getCsrfToken
 }

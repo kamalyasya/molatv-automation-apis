@@ -17,7 +17,9 @@ require('../test/multiLanguageUi/getUserLanguage')
 // Parental Control
 require('../test/parentalControl/parentalControl')
 require('../test/parentalControl/profile')
+require('../test/parentalControl/signUp')
 require('../test/parentalControl/userPin')
+require('../test/parentalControl/videos')
 
 // Subscriptions
 require('../test/subscriptions/getSubscriptionsPackage')

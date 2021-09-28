@@ -1,0 +1,1061 @@
+{
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "projectId": {
+                "type": "integer"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "shortDescription": {
+                    "type": "string"
+                  },
+                  "visibility": {
+                    "type": "integer"
+                  },
+                  "permission": {
+                    "type": "integer"
+                  },
+                  "contentType": {
+                    "type": "integer"
+                  },
+                  "viewsCount": {
+                    "type": "integer"
+                  },
+                  "likesCount": {
+                    "type": "integer"
+                  },
+                  "dislikesCount": {
+                    "type": "integer"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "streamSourceUrl": {
+                    "type": "null"
+                  },
+                  "duration": {
+                    "type": "integer"
+                  },
+                  "startTime": {
+                    "type": "null"
+                  },
+                  "endTime": {
+                    "type": "null"
+                  },
+                  "displayOrder": {
+                    "type": "null"
+                  },
+                  "expireAt": {
+                    "type": "null"
+                  },
+                  "createdAt": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "isHighlight": {
+                    "type": "integer"
+                  },
+                  "year": {
+                    "type": "null"
+                  },
+                  "suitableAge": {
+                    "type": "integer"
+                  },
+                  "award": {
+                    "type": "null"
+                  },
+                  "ads": {
+                    "type": "integer"
+                  },
+                  "releaseDate": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "date": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "date",
+                          "country"
+                        ]
+                      }
+                    ]
+                  },
+                  "subtitles": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "quotes": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "genre": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "primaryGenre": {
+                    "type": "null"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "region": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "adsSpot": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "league": {
+                    "type": "null"
+                  },
+                  "seo": {
+                    "type": "object",
+                    "properties": {
+                      "imageUrl": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "keywords": {
+                        "type": "array",
+                        "items": [
+                          {
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "tags": {
+                        "type": "array",
+                        "items": [
+                          {
+                            "type": "object"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "imageUrl",
+                      "title",
+                      "description",
+                      "keywords",
+                      "tags"
+                    ]
+                  },
+                  "drm": {
+                    "type": "object",
+                    "properties": {
+                      "drmEnabled": {
+                        "type": "boolean"
+                      },
+                      "fairplay": {
+                        "type": "object",
+                        "properties": {
+                          "streamUrl": {
+                            "type": "null"
+                          },
+                          "licenseUrl": {
+                            "type": "string"
+                          },
+                          "licenseUrlToken": {
+                            "type": "string"
+                          },
+                          "certificateUrl": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "streamUrl",
+                          "licenseUrl",
+                          "licenseUrlToken",
+                          "certificateUrl"
+                        ]
+                      },
+                      "widevine": {
+                        "type": "object",
+                        "properties": {
+                          "streamUrl": {
+                            "type": "null"
+                          },
+                          "licenseUrl": {
+                            "type": "string"
+                          },
+                          "licenseUrlToken": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "streamUrl",
+                          "licenseUrl",
+                          "licenseUrlToken"
+                        ]
+                      },
+                      "playready": {
+                        "type": "object",
+                        "properties": {
+                          "streamUrl": {
+                            "type": "null"
+                          },
+                          "licenseUrl": {
+                            "type": "string"
+                          },
+                          "licenseUrlToken": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "streamUrl",
+                          "licenseUrl",
+                          "licenseUrlToken"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "drmEnabled",
+                      "fairplay",
+                      "widevine",
+                      "playready"
+                    ]
+                  },
+                  "images": {
+                    "type": "object",
+                    "properties": {
+                      "cover": {
+                        "type": "object",
+                        "properties": {
+                          "portrait": {
+                            "type": "string"
+                          },
+                          "landscape": {
+                            "type": "string"
+                          },
+                          "background": {
+                            "type": "object",
+                            "properties": {
+                              "portrait": {
+                                "type": "string"
+                              },
+                              "landscape": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "portrait",
+                              "landscape"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "portrait",
+                          "landscape",
+                          "background"
+                        ]
+                      },
+                      "thumbnails": {
+                        "type": "object",
+                        "properties": {
+                          "preview": {
+                            "type": "string"
+                          },
+                          "cover": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "preview",
+                          "cover"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "cover",
+                      "thumbnails"
+                    ]
+                  },
+                  "playlists": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "attributes": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "shortTitle": {
+                                "type": "null"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "visibility": {
+                                "type": "integer"
+                              },
+                              "contentType": {
+                                "type": "integer"
+                              },
+                              "contentStyle": {
+                                "type": "string"
+                              },
+                              "pageStyle": {
+                                "type": "string"
+                              },
+                              "forceChildStyle": {
+                                "type": "null"
+                              },
+                              "playlistStyle": {
+                                "type": "null"
+                              },
+                              "countryCode": {
+                                "type": "null"
+                              },
+                              "iconUrl": {
+                                "type": "null"
+                              },
+                              "sortOrder": {
+                                "type": "integer"
+                              },
+                              "parentId": {
+                                "type": "null"
+                              },
+                              "status": {
+                                "type": "integer"
+                              },
+                              "createdAt": {
+                                "type": "integer"
+                              },
+                              "updatedAt": {
+                                "type": "integer"
+                              },
+                              "seasonNumber": {
+                                "type": "integer"
+                              },
+                              "isSeason": {
+                                "type": "integer"
+                              },
+                              "isSeries": {
+                                "type": "integer"
+                              },
+                              "images": {
+                                "type": "object",
+                                "properties": {
+                                  "cover": {
+                                    "type": "object",
+                                    "properties": {
+                                      "portrait": {
+                                        "type": "string"
+                                      },
+                                      "landscape": {
+                                        "type": "string"
+                                      },
+                                      "background": {
+                                        "type": "object",
+                                        "properties": {
+                                          "portrait": {
+                                            "type": "string"
+                                          },
+                                          "landscape": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "portrait",
+                                          "landscape"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "portrait",
+                                      "landscape",
+                                      "background"
+                                    ]
+                                  },
+                                  "thumbnails": {
+                                    "type": "object",
+                                    "properties": {
+                                      "preview": {
+                                        "type": "string"
+                                      },
+                                      "cover": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "preview",
+                                      "cover"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "cover",
+                                  "thumbnails"
+                                ]
+                              },
+                              "seo": {
+                                "type": "object",
+                                "properties": {
+                                  "imageUrl": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "keywords": {
+                                    "type": "array",
+                                    "items": [
+                                      {
+                                        "type": "object"
+                                      }
+                                    ]
+                                  },
+                                  "tags": {
+                                    "type": "array",
+                                    "items": [
+                                      {
+                                        "type": "object"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "imageUrl",
+                                  "title",
+                                  "description",
+                                  "keywords",
+                                  "tags"
+                                ]
+                              },
+                              "viewMorePortrait": {
+                                "type": "null"
+                              },
+                              "viewMoreLandscape": {
+                                "type": "null"
+                              },
+                              "viewMorePortraitWebp": {
+                                "type": "null"
+                              },
+                              "viewMoreLandscapeWebp": {
+                                "type": "null"
+                              },
+                              "menuId": {
+                                "type": "null"
+                              },
+                              "viewMorePlaylistId": {
+                                "type": "string"
+                              },
+                              "ribbon": {
+                                "type": "null"
+                              },
+                              "createdBy": {
+                                "type": "string"
+                              },
+                              "updatedBy": {
+                                "type": "string"
+                              },
+                              "releaseDate": {
+                                "type": "array",
+                                "items": [
+                                  {
+                                    "type": "object"
+                                  }
+                                ]
+                              },
+                              "ogImageLandscape": {
+                                "type": "null"
+                              },
+                              "ogImagePortrait": {
+                                "type": "null"
+                              },
+                              "shortDescription": {
+                                "type": "string"
+                              },
+                              "childType": {
+                                "type": "null"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "shortTitle",
+                              "description",
+                              "visibility",
+                              "contentType",
+                              "contentStyle",
+                              "pageStyle",
+                              "forceChildStyle",
+                              "playlistStyle",
+                              "countryCode",
+                              "iconUrl",
+                              "sortOrder",
+                              "parentId",
+                              "status",
+                              "createdAt",
+                              "updatedAt",
+                              "seasonNumber",
+                              "isSeason",
+                              "isSeries",
+                              "images",
+                              "seo",
+                              "viewMorePortrait",
+                              "viewMoreLandscape",
+                              "viewMorePortraitWebp",
+                              "viewMoreLandscapeWebp",
+                              "menuId",
+                              "viewMorePlaylistId",
+                              "ribbon",
+                              "createdBy",
+                              "updatedBy",
+                              "releaseDate",
+                              "ogImageLandscape",
+                              "ogImagePortrait",
+                              "shortDescription",
+                              "childType"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "id",
+                          "attributes"
+                        ]
+                      }
+                    ]
+                  },
+                  "trailers": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "people": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "attributes": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "link": {
+                                "type": "string"
+                              },
+                              "imageUrl": {
+                                "type": "string"
+                              },
+                              "peopleTypeId": {
+                                "type": "integer"
+                              },
+                              "peopleTypeName": {
+                                "type": "string"
+                              },
+                              "createdBy": {
+                                "type": "null"
+                              },
+                              "updatedBy": {
+                                "type": "null"
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "link",
+                              "imageUrl",
+                              "peopleTypeId",
+                              "peopleTypeName",
+                              "createdBy",
+                              "updatedBy"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "id",
+                          "attributes"
+                        ]
+                      }
+                    ]
+                  },
+                  "homeTeam": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "awayTeam": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "audios": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "watermarkEnabled": {
+                    "type": "boolean"
+                  },
+                  "watermarkText": {
+                    "type": "null"
+                  },
+                  "platforms": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "imageUrl": {
+                            "type": "string"
+                          },
+                          "displayOrder": {
+                            "type": "integer"
+                          },
+                          "status": {
+                            "type": "integer"
+                          },
+                          "visibility": {
+                            "type": "integer"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name",
+                          "imageUrl",
+                          "displayOrder",
+                          "status",
+                          "visibility",
+                          "createdAt"
+                        ]
+                      }
+                    ]
+                  },
+                  "outputControl": {
+                    "type": "boolean"
+                  },
+                  "menuId": {
+                    "type": "integer"
+                  },
+                  "bugLogo": {
+                    "type": "null"
+                  },
+                  "ribbon": {
+                    "type": "null"
+                  },
+                  "cardType": {
+                    "type": "null"
+                  },
+                  "videoType": {
+                    "type": "integer"
+                  },
+                  "partnerVideoId": {
+                    "type": "null"
+                  },
+                  "forceDrmEnabled": {
+                    "type": "integer"
+                  },
+                  "disclaimerEnabled": {
+                    "type": "integer"
+                  },
+                  "isEpisode": {
+                    "type": "integer"
+                  },
+                  "episodeNumber": {
+                    "type": "integer"
+                  },
+                  "seasonNumber": {
+                    "type": "integer"
+                  },
+                  "isActive": {
+                    "type": "integer"
+                  },
+                  "replayVideoId": {
+                    "type": "null"
+                  },
+                  "seriesPlaylistId": {
+                    "type": "string"
+                  },
+                  "seriesPlaylistTitle": {
+                    "type": "string"
+                  },
+                  "showLiveChat": {
+                    "type": "integer"
+                  },
+                  "isMVSN": {
+                    "type": "integer"
+                  },
+                  "availableFrom": {
+                    "type": "integer"
+                  },
+                  "availableUntil": {
+                    "type": "integer"
+                  },
+                  "ogImageLandscape": {
+                    "type": "null"
+                  },
+                  "ogImagePortrait": {
+                    "type": "null"
+                  },
+                  "introTime": {
+                    "type": "null"
+                  },
+                  "creditsTime": {
+                    "type": "null"
+                  },
+                  "ageRating": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "minAge": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "shortName": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "imageURL": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "createdBy": {
+                            "type": "null"
+                          },
+                          "updatedBy": {
+                            "type": "null"
+                          }
+                        },
+                        "required": [
+                          "minAge",
+                          "name",
+                          "shortName",
+                          "description",
+                          "imageURL",
+                          "createdAt",
+                          "updatedAt",
+                          "createdBy",
+                          "updatedBy"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "id",
+                      "attributes"
+                    ]
+                  },
+                  "ageRatings": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "attributes": {
+                            "type": "object",
+                            "properties": {
+                              "minAge": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "shortName": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "imageURL": {
+                                "type": "string"
+                              },
+                              "createdAt": {
+                                "type": "string"
+                              },
+                              "updatedAt": {
+                                "type": "string"
+                              },
+                              "createdBy": {
+                                "type": "null"
+                              },
+                              "updatedBy": {
+                                "type": "null"
+                              }
+                            },
+                            "required": [
+                              "minAge",
+                              "name",
+                              "shortName",
+                              "description",
+                              "imageURL",
+                              "createdAt",
+                              "updatedAt",
+                              "createdBy",
+                              "updatedBy"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "id",
+                          "attributes"
+                        ]
+                      }
+                    ]
+                  },
+                  "streamSourceRatio1": {
+                    "type": "null"
+                  },
+                  "streamSourceRatio2": {
+                    "type": "null"
+                  },
+                  "pillarId": {
+                    "type": "integer"
+                  },
+                  "pillarName": {
+                    "type": "string"
+                  },
+                  "updatedAt": {
+                    "type": "integer"
+                  },
+                  "createdBy": {
+                    "type": "string"
+                  },
+                  "updatedBy": {
+                    "type": "null"
+                  },
+                  "contentDetailIDs": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "contentDetails": {
+                    "type": "null"
+                  },
+                  "streamSourceUrl4k": {
+                    "type": "null"
+                  },
+                  "iosStreamSourceUrl4k": {
+                    "type": "null"
+                  },
+                  "androidStreamSourceUrl4k": {
+                    "type": "null"
+                  }
+                },
+                "required": [
+                  "title",
+                  "description",
+                  "shortDescription",
+                  "visibility",
+                  "permission",
+                  "contentType",
+                  "viewsCount",
+                  "likesCount",
+                  "dislikesCount",
+                  "source",
+                  "streamSourceUrl",
+                  "duration",
+                  "startTime",
+                  "endTime",
+                  "displayOrder",
+                  "expireAt",
+                  "createdAt",
+                  "rating",
+                  "isHighlight",
+                  "year",
+                  "suitableAge",
+                  "award",
+                  "ads",
+                  "releaseDate",
+                  "subtitles",
+                  "quotes",
+                  "genre",
+                  "primaryGenre",
+                  "tags",
+                  "region",
+                  "adsSpot",
+                  "league",
+                  "seo",
+                  "drm",
+                  "images",
+                  "playlists",
+                  "trailers",
+                  "people",
+                  "homeTeam",
+                  "awayTeam",
+                  "audios",
+                  "watermarkEnabled",
+                  "watermarkText",
+                  "platforms",
+                  "outputControl",
+                  "menuId",
+                  "bugLogo",
+                  "ribbon",
+                  "cardType",
+                  "videoType",
+                  "partnerVideoId",
+                  "forceDrmEnabled",
+                  "disclaimerEnabled",
+                  "isEpisode",
+                  "episodeNumber",
+                  "seasonNumber",
+                  "isActive",
+                  "replayVideoId",
+                  "seriesPlaylistId",
+                  "seriesPlaylistTitle",
+                  "showLiveChat",
+                  "isMVSN",
+                  "availableFrom",
+                  "availableUntil",
+                  "ogImageLandscape",
+                  "ogImagePortrait",
+                  "introTime",
+                  "creditsTime",
+                  "ageRating",
+                  "ageRatings",
+                  "streamSourceRatio1",
+                  "streamSourceRatio2",
+                  "pillarId",
+                  "pillarName",
+                  "updatedAt",
+                  "createdBy",
+                  "updatedBy",
+                  "contentDetailIDs",
+                  "contentDetails",
+                  "streamSourceUrl4k",
+                  "iosStreamSourceUrl4k",
+                  "androidStreamSourceUrl4k"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "projectId",
+              "attributes"
+            ]
+          }
+        ]
+      }
+    },
+    "required": [
+      "data"
+    ]
+  }

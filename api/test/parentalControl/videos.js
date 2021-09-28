@@ -8,11 +8,19 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { signUp } = require('../../common/apiRequest');
+const { getVideoId } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
+const schemaVideoId = require('../../data/videoId.json');
 
-describe('Sign Up', () => {
-  describe('Sign Up ', () => {
+describe('Parental Control', () => {
+  describe('Get data by video_id - [GET] /api/v2/videos/{video_id}?language={language_id}', () => {
+    let response
+    let auth
+
+    beforeEach( async () => {
+      auth = await getTokenFromFile()
+    })
+
     afterEach(function() {
       if (this.currentTest.state == 'failed') { 
           console.log("    * Response Code: " + util.inspect(response.status,{depth: null, colors: true}) + "\n");
@@ -21,23 +29,13 @@ describe('Sign Up', () => {
       }
     })
   
-    it('User can register using valid email', async() => { 
-      const email =  "t.hbo+"+Number(new Date())+"@mola.tv"
-      const payload = 
-        {
-            "email"     : email,
-            "password"  : process.env.ACCOUNT_HBO_PASSWORD
-        }
-      
-      response =  await signUp(payload).then(res => res)
+    it('Get data by video_id', async() => {  
+      video_id = 'id-dengan-agerating-baru'
+      language_id = 'id'
+      response =  await getVideoId(auth.auth_token, video_id, language_id).then(res => res)
       
       expect(response.status).to.equal(200)
-      expect(response.body).to.be.a('object')
-      expect(response.body.data).to.be.a('object')
-      expect(response.body.data.method).to.be.a('string')
-      expect(response.body.data.method).to.equal('email')
-      expect(response.body.data.sent_to).to.be.a('string')
-      expect(response.body.data.sent_to).to.equal(email)
+      expect(response.body).to.be.jsonSchema(schemaVideoId);
       
     })
     
