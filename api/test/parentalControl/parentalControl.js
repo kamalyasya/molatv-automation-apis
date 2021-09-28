@@ -20,12 +20,12 @@ describe('Parental Control', () => {
       auth = await getTokenFromFile()
     })
 
-    afterEach(() => {
-      // if (this.currentTest.state == 'failed') { 
-      //   console.log("    * Response Code: " + util.inspect(response.status,{depth: null, colors: true}) + "\n");
-      //   console.log("    * Response Header: " + util.inspect(response.header,{depth: null, colors: true}) + "\n");
-      //   console.log("    * Response body: " + util.inspect(response.body,{depth: null, colors: true}) + "\n");
-      // }
+    afterEach(function() {
+      if (this.currentTest.state == 'failed') { 
+        console.log("    * Response Code: " + util.inspect(response.status,{depth: null, colors: true}) + "\n");
+        console.log("    * Response Header: " + util.inspect(response.header,{depth: null, colors: true}) + "\n");
+        console.log("    * Response body: " + util.inspect(response.body,{depth: null, colors: true}) + "\n");
+      }
     })
 
     it('Get age limit - [GET] /api/v2/userdata/parental-control', async() => {
