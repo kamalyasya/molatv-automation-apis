@@ -107,6 +107,12 @@ const postMethod = (access_token, payload, path) =>
     .set('Authorization', access_token)
     .send(payload)
 
+const deleteMethod = (access_token, payload, path) => 
+  chai.request(process.env.HOST)
+    .delete(path)
+    .set('Content-Type', 'application/json')
+    .set('Authorization', access_token)
+    .send(payload)
 
 const getMethod = (path) => {
   return chai.request(process.env.HOST)
@@ -162,6 +168,7 @@ module.exports = {
   getAppParamsByPlatformId,
   postMethod,
   getMethod,
+  deleteMethod,
   getParentalControl,
   getVideoId,
   signUp,
