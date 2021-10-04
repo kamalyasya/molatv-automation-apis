@@ -1,8 +1,8 @@
 const env = require('dotenv').config();
 const fs = require('fs');
 const { loginWithCredentials } = require('./apiRequest')
-const email = process.env.ACCOUNT_CINCIN_EMAIL
-const password = process.env.ACCOUNT_CINCIN_PASSWORD
+const email = process.env.ACCOUNT_HBO_EMAIL
+const password = process.env.ACCOUNT_HBO_PASSWORD
 const api_key = 'wIHGzJhset'
 const grant_type = 'password'
 const scope = 'https://internal.supersoccer.tv/users/users.profile.read https://internal.supersoccer.tv/subscriptions/users.read.global https://api.supersoccer.tv/subscriptions/subscriptions.read https://api.supersoccer.tv/orders/orders.create https://api.supersoccer.tv/videos/videos.read https://api.supersoccer.tv/orders/orders.read paymentmethods:read.internal openid profile.internal payments:payment.dopay https://internal.supersoccer.tv/offline_access userdata:preference.read userdata:preference.insert'

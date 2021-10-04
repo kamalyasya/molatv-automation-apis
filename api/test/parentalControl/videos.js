@@ -4,14 +4,23 @@ const chaiHttp = require('chai-http')
 
 const chai = require('chai')
 chai.use(require('chai-json-schema'))
-chai.use(require('chai-things'));
 chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { getPlaylistByLanguage } = require('../../common/apiRequest');
-describe('Multi country catalog', () => { 
-  describe('Get Playlist data by Language - [GET] /api/v2/videos/playlists/{playlist_id}', () => {
+const { getVideoId } = require('../../common/apiRequest');
+const { getTokenFromFile } = require('../../common/getToken');
+const schemaVideoId = require('../../data/videoId.json');
+
+describe('Parental Control', () => {
+  describe('Get data by video_id - [GET] /api/v2/videos/{video_id}?language={language_id}', () => {
+    let response
+    let auth
+
+    beforeEach( async () => {
+      auth = await getTokenFromFile()
+    })
+
     afterEach(function(){
       if(process.env.DEBUG_MODE == 'true') {
         if (this.currentTest.state == 'failed') { 
@@ -24,17 +33,15 @@ describe('Multi country catalog', () => {
       }
     })
   
-    it('Get Playlist data by Language - EN', async() => {  
-      playlist_id = 'home-default'
-      language = 'en'
-      response =  await getPlaylistByLanguage(playlist_id, language).then(res => res)
+    it('Get data by video_id', async() => {  
+      video_id = 'id-dengan-agerating-baru'
+      language_id = 'id'
+      response =  await getVideoId(auth.auth_token, video_id, language_id).then(res => res)
       
       expect(response.status).to.equal(200)
-      expect(response.body).to.be.a('object')
-      expect(response.body.data).to.be.a('array')
-      expect(response.body.data).to.all.have.property('type', 'playlists')
-      expect(response.body.data).to.all.have.keys('type','id', 'attributes')
-      expect(response.body.data[0].attributes).to.be.a('object')
+      expect(response.body).to.be.jsonSchema(schemaVideoId);
+      
     })
+    
   })
 })

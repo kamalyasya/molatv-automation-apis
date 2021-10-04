@@ -4,14 +4,13 @@ const chaiHttp = require('chai-http')
 
 const chai = require('chai')
 chai.use(require('chai-json-schema'))
-chai.use(require('chai-things'));
 chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { getUserLanguage } = require('../../common/apiRequest');
+const { getCsrfToken, CsrfToken } = require('../common/apiRequest');
 
-describe('Multi Language UI', () => { 
+describe('GET CSRF Token', () => {
   afterEach(function(){
     if(process.env.DEBUG_MODE == 'true') {
       if (this.currentTest.state == 'failed') { 
@@ -24,16 +23,14 @@ describe('Multi Language UI', () => {
     }
   })
 
-  describe('Get User Language - [GET] /api/v2/config/languages', () => {  
-    it('Get User Language', async() => {  
-      response =  await getUserLanguage().then(res => res)
-      
-      expect(response.status).to.equal(200)
-      expect(response.body).to.be.a('object')
-      expect(response.body.data).to.be.a('array')
-      expect(response.body.data).to.all.have.property('type', 'language')
-      expect(response.body.data).to.all.have.keys('id', 'type', 'attributes')
-      expect(response.body.data[0].attributes).to.be.a('object')
-    })
+  it('GET CSRF Token', async() => {
+    response = await CsrfToken('_csrf=q6lGDXZsypUP9WhF6nOmYxF6').then(res => res)    
+    console.log('BODY : '+response.body )  
+
+    expect(response.status).to.equal(200)
+    expect(response.body['_csrf']).to.not.null
+    expect(response.body['_csrf']).to.be.a("string")
+    expect(response.body['x-csrf-token']).to.not.null
+    expect(response.body['x-csrf-token']).to.be.a("string")
   })
 })

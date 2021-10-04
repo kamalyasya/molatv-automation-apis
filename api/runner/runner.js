@@ -16,9 +16,11 @@ require('../test/config/getAppParamsByPlatformId')
 
 // Parental Control
 require('../test/parentalControl/parentalControl')
-// require('../test/parentalControl/profile')
-// require('../test/parentalControl/userPin')
 require('../test/parentalControl/ageRating')
+require('../test/parentalControl/profile')
+require('../test/parentalControl/signUp')
+require('../test/parentalControl/userPin')
+require('../test/parentalControl/videos')
 
 // Subscriptions
 // require('../test/subscriptions/getSubscriptionsPackage')
