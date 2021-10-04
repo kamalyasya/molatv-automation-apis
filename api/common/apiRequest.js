@@ -16,6 +16,14 @@ const loginWithCredentials = (app_key, grant_type, scope, email, password) => {
       "password": password
     })
 }
+// age rating
+const ageRating = (payload) => {
+  chai.request(process.env.HOST)
+    .get('/api/v2/videos/age-rating/country')
+    .set('Content-Type', 'application/json')
+    .set('Cookie', Cookie)
+    .send(payload)
+}
 
 // profile
 const getProfile = (access_token) => {
@@ -123,6 +131,7 @@ module.exports = {
   loginWithCredentials,
   getProfile,
   updateProfile,
+  ageRating,
   addDevice,
   getPlaylistRoot,
   getPlaylistByLanguage,
