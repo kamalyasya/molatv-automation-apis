@@ -1,6 +1,10 @@
 const env = require('dotenv').config();
 const fs = require('fs');
 const { loginWithCredentials } = require('./apiRequest')
+// const email = process.env.ACCOUNT_KAMAL_EMAIL
+// const password = process.env.ACCOUNT_KAMAL_PASSWORD
+// const email = process.env.ACCOUNT_CINCIN_EMAIL
+// const password = process.env.ACCOUNT_CINCIN_PASSWORD
 const email = process.env.ACCOUNT_HBO_EMAIL
 const password = process.env.ACCOUNT_HBO_PASSWORD
 const api_key = 'wIHGzJhset'
@@ -35,14 +39,17 @@ const TOKEN_FILE = 'token.json';
 const getTokenAndSave = async () => {
   try {
     const response = await loginWithCredentials(api_key, grant_type, scope, email, password);
-    const expiredAt = +new Date() + response.body.expires_in;
-    response.body.expired_at = expiredAt;
-    console.log({
-      state: 'get token call',
-      token: response.body
-    })
-    fs.writeFileSync(TOKEN_FILE, JSON.stringify(response.body));
-    console.log("write token file success with:", response.body)
+    if(response.status == 200) {
+      const expiredAt = new Date().getTime() + (response.body.expires_in * 60);
+      response.body.expired_at = expiredAt;
+      response.body.email = email;
+      console.log({
+        state: 'get token call',
+        token: response.body
+      })
+      fs.writeFileSync(TOKEN_FILE, JSON.stringify(response.body));
+      console.log("write token file success with:", response.body)
+    }
   } catch (error) {
     throw new Error(error)
   }
@@ -53,8 +60,7 @@ const initateToken = () => {
     try {
       const fileToken = fs.readFileSync(TOKEN_FILE, 'utf8');
       const token = JSON.parse(fileToken);
-      // console.log('date date => ', token.expired_at, new Date().getTime(), token.expired_at < new Date().getTime(), token.expired_at > new Date().getTime())
-      if (token.expired_at > new Date().getTime()) {
+      if (email != token.email || token.expired_at < new Date().getTime()) {
         console.log({
           state: 'expired call to new token',
           token
@@ -66,7 +72,7 @@ const initateToken = () => {
       }
       resolve();
       return;
-    } catch (error) {
+    } catch (error) {      
       await getTokenAndSave();
       resolve();
       return;
