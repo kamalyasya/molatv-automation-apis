@@ -4,9 +4,10 @@
     "description": "MOLATV API Testing Framework with Mocha and Chai",
     "main": "index.js",
     "scripts": {
-        "test-api": "./node_modules/mocha/bin/mocha ./api/test --recursive --reporter mochawesome --reporter-options enableCode=true --reporter-options reportDir=reports/mochawesome/ --saveJson --timeout 180000",
-        "test": "./node_modules/mocha/bin/mocha ./api/runner --recursive --reporter mochawesome --reporter-options enableCode=true --reporter-options reportDir=reports/mochawesome/ --saveJson --timeout 30000",
-        "reports": "open 'reports/mochawesome/mochawesome.html'"
+        "test-api"  : "./node_modules/mocha/bin/mocha ./api/test --recursive --reporter mochawesome --reporter-options enableCode=true --reporter-options reportDir=reports/mochawesome/ --saveJson --timeout 180000",
+        "test"      : "HOST=https://mola.tv ./node_modules/mocha/bin/mocha ./api/runner --recursive --reporter mochawesome --reporter-options enableCode=true --reporter-options reportDir=reports/mochawesome/ --saveJson --timeout 30000",
+        "test-beta" : "HOST=https://beta.mola.tv ./node_modules/mocha/bin/mocha ./api/runner --recursive --reporter mochawesome --reporter-options enableCode=true --reporter-options reportDir=reports/mochawesome/ --saveJson --timeout 30000",
+        "reports"   : "open 'reports/mochawesome/mochawesome.html'"
     },
     "author": "MOLA",
     "dependencies": {
