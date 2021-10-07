@@ -7,9 +7,9 @@
 3. Add .env files to molatv-automation-apis directory
 
 # Running Test On Production
-npm run test --country=id/sg/my/it/uk
+npm run test --country=id/sg/my/it/gb
 
 # Running Test On Beta
-npm run test-beta --country=id/sg/my/it/uk
+npm run test-beta --country=id/sg/my/it/gb
 # Open Report
 npm run reports

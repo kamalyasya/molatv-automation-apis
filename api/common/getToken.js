@@ -65,14 +65,14 @@ const initateToken = () => {
           state: 'expired call to new token',
           token
         })
-        fs.rmSync(TOKEN_FILE);
+        // fs.rmSync(TOKEN_FILE); -> masuk under research
         await getTokenAndSave();
         resolve();
         return;
       }
       resolve();
       return;
-    } catch (error) {      
+    } catch (error) {
       await getTokenAndSave();
       resolve();
       return;
