@@ -33,7 +33,7 @@ describe('Config', () => {
     })
 
     it('Get country features - [GET] /api/v2/config/alrez/r/country-features', async() => {
-      const response =  await getMethod('/api/v2/config/alrez/r/country-features').then(res => res)      
+      const response =  await getMethod(auth.auth_token, '/api/v2/config/alrez/r/country-features').then(res => res)      
       expect(response.status).to.equal(200)
     })
   })

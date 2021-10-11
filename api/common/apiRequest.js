@@ -122,9 +122,11 @@ const deleteMethod = (access_token, payload, path) =>
     .set('Authorization', access_token)
     .send(payload)
 
-const getMethod = (path) => {
+const getMethod = (access_token, path) => {
   return chai.request(process.env.HOST)
     .get(path)
+    .set('Content-Type', 'application/json')
+    .set('Authorization', access_token)
 }
 
 //Parental Control

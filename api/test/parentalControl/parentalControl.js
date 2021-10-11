@@ -33,7 +33,7 @@ describe('Parental Control', () => {
     })
 
     it('Get age limit - [GET] /api/v2/userdata/parental-control', async() => {
-      const response =  await getMethod('/api/v2/userdata/parental-control').then(res => res)      
+      const response =  await getMethod(auth.auth_token, '/api/v2/userdata/parental-control').then(res => res)      
       expect(response.status).to.equal(200)
     })
   

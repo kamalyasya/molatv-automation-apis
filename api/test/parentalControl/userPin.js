@@ -55,8 +55,8 @@ describe('Parental Control', () => {
 
     it('Change PIN - [POST] /userdata/changePin', async() => {    
       payload = {
-        "oldPin": "5678",
-        "newPin": "1234"
+        "oldPin": "1234",
+        "newPin": "5678"
       }    
       response =  await postMethod(auth.auth_token, payload, '/api/v2/userdata/changePin').then(res => res)
       expect(response.status).to.equal(200)
@@ -72,7 +72,7 @@ describe('Parental Control', () => {
 
     it('Reset PIN - [POST] /userdata/resetPin', async () => {
       payload = {
-        "otp": response.body.attributes.otp,
+        "otp": response.body.data.attributes.otp,
         "pin": "1234"
       } 
       response =  await postMethod(auth.auth_token, payload, '/api/v2/userdata/resetPin').then(res => res)
