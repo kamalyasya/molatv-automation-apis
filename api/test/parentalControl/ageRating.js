@@ -33,13 +33,8 @@ describe('Parental Control', () => {
     })
 
     it('Get ageRating - [GET] /api/v2/videos/age-rating/country', async() => {
-      let payload = {
-        "name": "Mocha Chai Automation",
-        "description": "Umur 13 tahun ke atas",
-        "countryId": "id"
-      }
       
-      response =  await ageRating(auth.auth_token, payload)
+      response =  await ageRating().then(res => res)
           
       expect(response.status).to.equal(200)
     })

@@ -45,10 +45,10 @@ const getTokenAndSave = async () => {
       response.body.email = email;
       console.log({
         state: 'get token call',
-        token: response.body
+        // token: response.body
       })
       fs.writeFileSync(TOKEN_FILE, JSON.stringify(response.body));
-      console.log("write token file success with:", response.body)
+      // console.log("write token file success with:", response.body)
     }
   } catch (error) {
     throw new Error(error)
@@ -63,7 +63,7 @@ const initateToken = () => {
       if (email != token.email || token.expired_at < new Date().getTime()) {
         console.log({
           state: 'expired call to new token',
-          token
+          // token
         })
         // fs.rmSync(TOKEN_FILE); -> masuk under research
         await getTokenAndSave();
