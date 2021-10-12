@@ -71,6 +71,12 @@ const getInfoPin = (access_token) =>
     .get('/api/v2/userdata/pin/info')
     .set('Authorization', access_token)
 
+const deletePin = (access_token, payload) =>
+  chai.request(process.env.HOST)
+  .delete('/api/v2/userdata/pin?app_id=molatv')
+  .set('Authorization', access_token)
+  .send(payload)
+
 // Multi Country Catalog
 const getUserLanguage = () => 
   chai.request(process.env.HOST)
@@ -169,6 +175,7 @@ module.exports = {
   getPlaylistByLanguage,
   checkGeoguard,
   getInfoPin,
+  deletePin,
   getUserLanguage,
   getUiLanguage,
   getUserDataPreferencesLanguage,

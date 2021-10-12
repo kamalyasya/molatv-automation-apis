@@ -6,7 +6,7 @@ const chai = require('chai')
 chai.use(require('chai-json-schema'))
 chai.use(chaiHttp)
 
-const { getInfoPin, postMethod } = require('../../common/apiRequest');
+const { getInfoPin, postMethod, deletePin } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
 
 const expect = chai.expect
@@ -30,6 +30,13 @@ describe('Parental Control', () => {
           console.log("    * Response Body: " + util.inspect(response.body,{depth: null, colors: true}) + "\n");
         }
       }
+    })
+    it('Delete PIN - [DELETE] /userdata/pin?app_id=molatv', async() => {
+      payload = {
+        "userIds": [process.env.ACCOUNT_HBO_USERID]
+      }
+      response =  await deletePin(auth.auth_token, payload).then(res => res)      
+      expect(response.status).to.equal(200)
     })
 
     it('Get Info PIN - [GET] /userdata/pin/info', async() => {
