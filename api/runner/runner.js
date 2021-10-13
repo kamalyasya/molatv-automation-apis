@@ -17,7 +17,7 @@ console.log("============================================")
 // require('../test/multiCountryCatalog/playlistRoot')
 
 // // Multi Language UI
-require('../test/multiLanguageUi/getUiLanguage')
+// require('../test/multiLanguageUi/getUiLanguage')
 // require('../test/multiLanguageUi/getUserDataPreferences')
 // require('../test/multiLanguageUi/getUserLanguage')
 

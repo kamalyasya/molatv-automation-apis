@@ -107,23 +107,72 @@ const getAppParamsByPlatformId = (platform_id) =>
   .query({platformId: platform_id})
 
 // Main function
-const postMethod = (access_token, payload, path) => 
-  chai.request(process.env.HOST)
-    .post(path)
-    .set('Content-Type', 'application/json')
-    .set('Authorization', access_token)
-    .send(payload)
+const editMethod = (option, payload) => {
+  let chaiTest = chai.request(process.env.HOST)
+  if(option.method == 'put') {
+    chaiTest = chaiTest.put(option.path)
+  } else {
+    chaiTest = chaiTest.patch(option.path)
+  }
 
-const deleteMethod = (access_token, payload, path) => 
-  chai.request(process.env.HOST)
-    .delete(path)
+  if(option.token && option.token !== '') {
+    chaiTest.set('Authorization', option.token)
+  }
+
+  if(option.useCsrf) {
+    ChaiTest.set('Cookie', Cookie)
+      .set('x-csrf-token', x_csrf_token)
+  }
+
+  if(option.query) {
+    ChaiTest.query(option.query)
+  }
+
+  return chaiTest.send(payload)
+}
+
+const postMethod = (option, payload) => {
+  let chaiTest = chai.request(process.env.HOST).post(option.path)
     .set('Content-Type', 'application/json')
-    .set('Authorization', access_token)
-    .send(payload)
+
+  if(option.token && option.token !== '') {
+    chaiTest.set('Authorization', option.token)
+  }
+
+  if(option.useCsrf) {
+    ChaiTest.set('Cookie', Cookie)
+      .set('x-csrf-token', x_csrf_token)
+  }
+
+  if(option.query) {
+    ChaiTest.query(option.query)
+  }
+
+  return chaiTest.send(payload)
+}
+
+const deleteMethod = (option, payload) => {
+  let ChaiTest = chai.request(process.env.HOST).delete(option.path)
+    .set('Content-Type', 'application/json')
+
+  if(option.token && option.token !== '') {
+    ChaiTest.set('Authorization', option.token)
+  }
+
+  if(option.useCsrf) {
+    ChaiTest.set('Cookie', Cookie)
+      .set('x-csrf-token', x_csrf_token)
+  }
+
+  if(option.query) {
+    ChaiTest.query(option.query)
+  }
+
+  return chaiTest.send(payload).send(payload)
+}
 
 const getMethod = (option) => {
-  let ChaiTest = chai.request(process.env.HOST)
-    .get(option.path)
+  let ChaiTest = chai.request(process.env.HOST).get(option.path)
     .set('Content-Type', 'application/json')
     
   if(option.token && option.token !== '') {
@@ -192,6 +241,7 @@ module.exports = {
   postMethod,
   getMethod,
   deleteMethod,
+  editMethod,
   getParentalControl,
   getVideoId,
   signUp,
