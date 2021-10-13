@@ -13,7 +13,6 @@ const { getTokenFromFile } = require('../../common/getToken');
 
 describe('Config', () => { 
   describe('Features list in a country ', () => {
-    let payload    
     let auth
 
     beforeEach( async () => {
@@ -33,7 +32,12 @@ describe('Config', () => {
     })
 
     it('Get country features - [GET] /api/v2/config/alrez/r/country-features', async() => {
-      const response =  await getMethod(auth.auth_token, '/api/v2/config/alrez/r/country-features').then(res => res)      
+      option = {
+        token: auth.auth_token,
+        path: '/api/v2/config/alrez/r/country-features',
+        useCsrf: true
+      }
+      const response =  await getMethod(option).then(res => res)      
       expect(response.status).to.equal(200)
     })
   })

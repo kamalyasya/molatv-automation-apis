@@ -9,7 +9,7 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { getUserDataPreferencesLanguage } = require('../../common/apiRequest');
+const { getUserDataPreferencesLanguage, getMethod } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
 
 describe('Multi Language UI', () => { 
@@ -31,8 +31,13 @@ describe('Multi Language UI', () => {
   })
 
   describe('Get User Preference Language - [GET] /api/v2/userdata/preferences/user-language?null=true/false', () => {  
-    it('Get User Preference Language - null=true', async() => {  
-      response =  await getUserDataPreferencesLanguage(auth.auth_token, true).then(res => res)
+    it('Get User Preference Language - null=true', async() => {
+      option = {
+        token: auth.auth_token,
+        path: '/api/v2/userdata/preferences/user-language',
+        query: {null: true}
+      }
+      response =  await getMethod(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')

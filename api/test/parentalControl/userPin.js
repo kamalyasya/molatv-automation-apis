@@ -6,7 +6,7 @@ const chai = require('chai')
 chai.use(require('chai-json-schema'))
 chai.use(chaiHttp)
 
-const { getInfoPin, postMethod, deletePin } = require('../../common/apiRequest');
+const { getMethod, postMethod, deletePin } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
 
 const expect = chai.expect
@@ -40,7 +40,12 @@ describe('Parental Control', () => {
     })
 
     it('Get Info PIN - [GET] /userdata/pin/info', async() => {
-      response =  await getInfoPin(auth.auth_token).then(res => res)      
+      option = {
+        token: auth.auth_token,
+        path: '/api/v2/userdata/pin/info'
+      }
+      
+      response =  await getMethod(option).then(res => res)      
       expect(response.status).to.equal(200)
     })
   
@@ -48,7 +53,13 @@ describe('Parental Control', () => {
       payload = {
         "PIN": "1234"
       }
-      response =  await postMethod(auth.auth_token, payload, '/api/v2/userdata/setPin').then(res => res)      
+
+      option = {
+        token: auth.auth_token,
+        path: '/api/v2/userdata/setPin'
+      }
+
+      response =  await postMethod(option, payload).then(res => res)      
       expect(response.status).to.be.oneOf([200, 409]);
     })
 
@@ -56,7 +67,13 @@ describe('Parental Control', () => {
       payload = {
         "PIN": "1234"
       }
-      response =  await postMethod(auth.auth_token, payload, '/api/v2/userdata/checkPin').then(res => res)
+
+      option = {
+        token: auth.auth_token,
+        path: '/api/v2/userdata/checkPin'
+      }
+
+      response =  await postMethod(option, payload).then(res => res)
       expect(response.status).to.equal(200)
     })
 
@@ -64,16 +81,28 @@ describe('Parental Control', () => {
       payload = {
         "oldPin": "1234",
         "newPin": "5678"
-      }    
-      response =  await postMethod(auth.auth_token, payload, '/api/v2/userdata/changePin').then(res => res)
+      }
+
+      option = {
+        token: auth.auth_token,
+        path: '/api/v2/userdata/changePin'
+      }
+
+      response =  await postMethod(option, payload).then(res => res)
       expect(response.status).to.equal(200)
     })
 
     it('Forgot PIN - [POST] /userdata/forgotPin', async() => { 
       payload = {
         "password": process.env.ACCOUNT_HBO_PASSWORD
-      } 
-      response =  await postMethod(auth.auth_token, payload, '/api/v2/userdata/forgotPin').then(res => res)
+      }
+
+      option = {
+        token: auth.auth_token,
+        path: '/api/v2/userdata/forgotPin'
+      }
+      
+      response =  await postMethod(option, payload).then(res => res)
       expect(response.status).to.equal(200)
     })
 
@@ -82,7 +111,13 @@ describe('Parental Control', () => {
         "otp": response.body.data.attributes.otp,
         "pin": "1234"
       } 
-      response =  await postMethod(auth.auth_token, payload, '/api/v2/userdata/resetPin').then(res => res)
+
+      option = {
+        token: auth.auth_token,
+        path: '/api/v2/userdata/resetPin'
+      }
+
+      response =  await postMethod(option, payload).then(res => res)
       expect(response.status).to.equal(200)
     })
   })
