@@ -6,7 +6,7 @@ const chai = require('chai')
 chai.use(require('chai-json-schema'))
 chai.use(chaiHttp)
 
-const { getInfoPin, postMethod, deletePin } = require('../../common/apiRequest');
+const { getMethod, postMethod, deletePin } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
 
 const expect = chai.expect
@@ -40,7 +40,12 @@ describe('Parental Control', () => {
     })
 
     it('Get Info PIN - [GET] /userdata/pin/info', async() => {
-      response =  await getInfoPin(auth.auth_token).then(res => res)      
+      option = {
+        token: auth.auth_token,
+        path: '/api/v2/userdata/pin/info'
+      }
+      
+      response =  await getMethod(option).then(res => res)      
       expect(response.status).to.equal(200)
     })
   

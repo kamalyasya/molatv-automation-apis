@@ -10,6 +10,7 @@ const expect = chai.expect
 
 const { getMethod, postMethod } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
+const { config } = require('dotenv')
 
 describe('Parental Control', () => { 
   describe('User can manipulate age limit ', () => {
@@ -33,7 +34,11 @@ describe('Parental Control', () => {
     })
 
     it('Get age limit - [GET] /api/v2/userdata/parental-control', async() => {
-      const response =  await getMethod(auth.auth_token, '/api/v2/userdata/parental-control').then(res => res)      
+      option = {
+        token: auth.auth_token,
+        path: '/api/v2/userdata/parental-control'
+      }
+      const response =  await getMethod(option).then(res => res)      
       expect(response.status).to.equal(200)
     })
   

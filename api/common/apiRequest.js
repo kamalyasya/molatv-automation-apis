@@ -19,6 +19,7 @@ const loginWithCredentials = (app_key, grant_type, scope, email, password) => {
       "password": password
     })
 }
+
 // age rating
 const ageRating = (payload) =>
   chai.request(process.env.HOST)
@@ -66,16 +67,11 @@ chai.request(process.env.HOST)
     .get('/api/v2/videos/geoguard/check/'+video_id)
 
 //PIN
-const getInfoPin = (access_token) => 
-  chai.request(process.env.HOST)
-    .get('/api/v2/userdata/pin/info')
-    .set('Authorization', access_token)
-
 const deletePin = (access_token, payload) =>
   chai.request(process.env.HOST)
-  .delete('/api/v2/userdata/pin?app_id=molatv')
-  .set('Authorization', access_token)
-  .send(payload)
+    .delete('/api/v2/userdata/pin?app_id=molatv')
+    .set('Authorization', access_token)
+    .send(payload)
 
 // Multi Country Catalog
 const getUserLanguage = () => 
@@ -125,11 +121,25 @@ const deleteMethod = (access_token, payload, path) =>
     .set('Authorization', access_token)
     .send(payload)
 
-const getMethod = (access_token, path) => {
-  return chai.request(process.env.HOST)
-    .get(path)
+const getMethod = (option) => {
+  let ChaiTest = chai.request(process.env.HOST)
+    .get(option.path)
     .set('Content-Type', 'application/json')
-    .set('Authorization', access_token)
+    
+  if(option.token && option.token !== '') {
+    ChaiTest.set('Authorization', option.token)
+  }
+
+  if(option.useCsrf) {
+    ChaiTest.set('Cookie', Cookie)
+      .set('x-csrf-token', x_csrf_token)
+  }
+
+  if(option.query) {
+    ChaiTest.query(option.query)
+  }
+
+  return ChaiTest
 }
 
 //Parental Control
@@ -174,8 +184,6 @@ module.exports = {
   getPlaylistRoot,
   getPlaylistByLanguage,
   checkGeoguard,
-  getInfoPin,
-  deletePin,
   getUserLanguage,
   getUiLanguage,
   getUserDataPreferencesLanguage,
@@ -187,5 +195,6 @@ module.exports = {
   getParentalControl,
   getVideoId,
   signUp,
-  getCsrfToken
+  getCsrfToken,
+  deletePin
 }

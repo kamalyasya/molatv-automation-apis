@@ -9,7 +9,7 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { getUiLanguage } = require('../../common/apiRequest');
+const { getMethod } = require('../../common/apiRequest');
 
 describe('Multi Language UI', () => { 
   describe('Get UI Language - [GET] /api/v2/config/ui/language/{language_id}?platformId={platformId}', () => {
@@ -28,8 +28,13 @@ describe('Multi Language UI', () => {
     it('Get UI Language - EN', async() => {  
       language = 'en'
       platform_id = 1
+
+      option = {
+        path: '/api/v2/config/ui/language/'+language,
+        query: {platformId: platform_id}
+      }
       
-      response =  await getUiLanguage(language, platform_id).then(res => res)
+      response =  await getMethod(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
