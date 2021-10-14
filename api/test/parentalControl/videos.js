@@ -12,6 +12,7 @@ const { getVideoId } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
 const schemaVideoId = require('../../data/videoId.json');
 const country = process.env.npm_config_country
+const HOST = process.env.HOST
 
 describe('Parental Control', () => {
   describe('Get data by video_id - [GET] /api/v2/videos/{video_id}?language={language_id}', () => {
@@ -35,22 +36,39 @@ describe('Parental Control', () => {
     })
 
     it('Get data by video_id', async () => {
-
-      if (country == 'id') {
-        video_id = 'vdt2523182'
-        language_id = 'id'
-      } else if (country == 'sg') {
-        video_id = 'vdt2925331'
-        language_id = 'sg'
-      } else if (country == 'my') {
-        video_id = 'vd33072453'
-        language_id = 'my'
-      } else if (country == 'it') {
-        video_id = 'vd33072476'
-        language_id = 'it'
-      } else if (country == 'gb') {
-        video_id = 'vd33072506'
-        language_id = 'gb'
+      console.log(HOST.includes('beta')+" beta?")
+      if (HOST.includes('beta'))
+      {
+        if (country == 'id') {
+          video_id = 'vdt2523182'
+          language_id = 'id'
+        } else if (country == 'sg') {
+          video_id = 'vdt2925331'
+          language_id = 'sg'
+        } else if (country == 'my') {
+          video_id = 'vd33072453'
+          language_id = 'my'
+        } else if (country == 'it') {
+          video_id = 'vd33072476'
+          language_id = 'it'
+        } else if (country == 'gb') {
+          video_id = 'vd33072506'
+          language_id = 'gb'
+        }  
+      }
+      else {
+        video_id = 'vd23339307'
+        if (country == 'id') {
+          language_id = 'id'
+        } else if (country == 'sg') {
+          language_id = 'sg'
+        } else if (country == 'my') {
+          language_id = 'my'
+        } else if (country == 'it') {
+          language_id = 'it'
+        } else if (country == 'gb') {
+          language_id = 'gb'
+        }  
       }
 
 
