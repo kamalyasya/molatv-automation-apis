@@ -9,7 +9,7 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { checkGeoguard } = require('../../common/apiRequest');
+const { apiRequest } = require('../../common/apiRequest');
 
 describe('Multi country catalog', () => { 
   describe('Indonesian user - [GET] /api/v2/videos/geoguard/check/{video_id}', () => {
@@ -27,7 +27,12 @@ describe('Multi country catalog', () => {
   
     it('Can play videos with country set to indonesia', async() => {  
       video_id = 'vd71414281'
-      response =  await checkGeoguard(video_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/videos/geoguard/check/'+video_id
+      }
+
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -43,7 +48,12 @@ describe('Multi country catalog', () => {
 
     it('CANNOT play videos with country NOT set to indonesia', async() => {  
       video_id = 'vd71414281'
-      response =  await checkGeoguard(video_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/videos/geoguard/check/'+video_id
+      }
+
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')

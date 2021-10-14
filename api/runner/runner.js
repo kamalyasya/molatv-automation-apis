@@ -12,7 +12,7 @@ console.log("============================================")
 // require('../test/config/getAppParamsByPlatformId')
 
 // // Multi Country Catalog
-// require('../test/multiCountryCatalog/geoguardCheck')
+require('../test/multiCountryCatalog/geoguardCheck')
 // require('../test/multiCountryCatalog/playlistIdByLanguage')
 // require('../test/multiCountryCatalog/playlistRoot')
 

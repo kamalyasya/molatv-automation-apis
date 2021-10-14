@@ -9,7 +9,7 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { getAppParamsByPlatformId } = require('../../common/apiRequest');
+const { apiRequest } = require('../../common/apiRequest');
 
 describe('GET app-params', () => { 
   describe('GET] /api/v2/config/app-params?platformId={platformId}', () => {
@@ -26,8 +26,13 @@ describe('GET app-params', () => {
     })
   
     it('Get app-params Android platformId 1', async() => {  
-      platform_id = 1
-      response =  await getAppParamsByPlatformId(platform_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/config/app-params',
+        query: {platformId: 1}
+      }
+      
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -41,8 +46,13 @@ describe('GET app-params', () => {
     })
 
     it('Get app-params MPS platformId 4', async() => {  
-      platform_id = 4
-      response =  await getAppParamsByPlatformId(platform_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/config/app-params',
+        query: {platformId: 4}
+      }
+      
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -55,8 +65,13 @@ describe('GET app-params', () => {
     })
 
     it('Get app-params Web platformId 7', async() => {  
-      platform_id = 7
-      response =  await getAppParamsByPlatformId(platform_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/config/app-params',
+        query: {platformId: 7}
+      }
+      
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -69,8 +84,13 @@ describe('GET app-params', () => {
     })
 
     it('Get app-params iOS platformId 8', async() => {  
-      platform_id = 8
-      response =  await getAppParamsByPlatformId(platform_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/config/app-params',
+        query: {platformId: 8}
+      }
+      
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')

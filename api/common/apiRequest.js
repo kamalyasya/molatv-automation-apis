@@ -41,7 +41,6 @@ const updateProfile = (access_token, payload) =>
     .set('x-csrf-token', x_csrf_token)
     .send(payload)
 
-
 // device
 const addDevice = (access_token, userId) =>
   chai.request(process.env.HOST)
@@ -60,11 +59,6 @@ const getPlaylistByLanguage = (playlist_id, language) =>
 chai.request(process.env.HOST)
     .get('/api/v2/videos/playlists/' + playlist_id)
     .query({language: language})
-
-// Geoguard
-const checkGeoguard = (video_id) =>
-chai.request(process.env.HOST)
-    .get('/api/v2/videos/geoguard/check/'+video_id)
 
 //PIN
 const deletePin = (access_token, payload) =>
@@ -99,14 +93,28 @@ const getSubscriptionsPackageByPlatformId = (platform_id) =>
   .set('Content-Type', 'application/json')
   .query({platformId: platform_id})
 
-// app-params
-const getAppParamsByPlatformId = (platform_id) => 
-  chai.request(process.env.HOST)
-  .get('/api/v2/config/app-params')
-  .set('Content-Type', 'application/json')
-  .query({platformId: platform_id})
 
 // Main function
+const getMethod = (option) => {
+  let chaiTest = chai.request(process.env.HOST).get(option.path)
+    .set('Content-Type', 'application/json')
+    
+  if(option.token && option.token !== '') {
+    chaiTest.set('Authorization', option.token)
+  }
+
+  if(option.useCsrf) {
+    chaiTest.set('Cookie', Cookie)
+      .set('x-csrf-token', x_csrf_token)
+  }
+
+  if(option.query) {
+    chaiTest.query(option.query)
+  }
+
+  return chaiTest
+}
+
 const editMethod = (option, payload) => {
   let chaiTest = chai.request(process.env.HOST)
   if(option.method == 'put') {
@@ -120,12 +128,12 @@ const editMethod = (option, payload) => {
   }
 
   if(option.useCsrf) {
-    ChaiTest.set('Cookie', Cookie)
+    chaiTest.set('Cookie', Cookie)
       .set('x-csrf-token', x_csrf_token)
   }
 
   if(option.query) {
-    ChaiTest.query(option.query)
+    chaiTest.query(option.query)
   }
 
   return chaiTest.send(payload)
@@ -140,55 +148,72 @@ const postMethod = (option, payload) => {
   }
 
   if(option.useCsrf) {
-    ChaiTest.set('Cookie', Cookie)
+    chaiTest.set('Cookie', Cookie)
       .set('x-csrf-token', x_csrf_token)
   }
 
   if(option.query) {
-    ChaiTest.query(option.query)
+    chaiTest.query(option.query)
   }
 
   return chaiTest.send(payload)
 }
 
 const deleteMethod = (option, payload) => {
-  let ChaiTest = chai.request(process.env.HOST).delete(option.path)
+  let chaiTest = chai.request(process.env.HOST).delete(option.path)
     .set('Content-Type', 'application/json')
 
   if(option.token && option.token !== '') {
-    ChaiTest.set('Authorization', option.token)
+    chaiTest.set('Authorization', option.token)
   }
 
   if(option.useCsrf) {
-    ChaiTest.set('Cookie', Cookie)
+    chaiTest.set('Cookie', Cookie)
       .set('x-csrf-token', x_csrf_token)
   }
 
   if(option.query) {
-    ChaiTest.query(option.query)
+    chaiTest.query(option.query)
   }
 
   return chaiTest.send(payload).send(payload)
 }
 
-const getMethod = (option) => {
-  let ChaiTest = chai.request(process.env.HOST).get(option.path)
-    .set('Content-Type', 'application/json')
-    
-  if(option.token && option.token !== '') {
-    ChaiTest.set('Authorization', option.token)
+const apiRequest = (option, payload) => {
+  let chaiTest = chai.request(process.env.HOST)
+
+  if (option.method == 'get') {
+    chaiTest = chaiTest.get(option.path)
+  } else if(option.method == 'post') {
+    chaiTest = chaiTest.post(option.path)
+  } else if(option.method == 'put') {
+    chaiTest = chaiTest.put(option.path)
+  } else if(option.method == 'patch') {
+    chaiTest = chaiTest.patch(option.path)
+  } else {
+    chaiTest = chaiTest.delete(option.path)
   }
 
-  if(option.useCsrf) {
-    ChaiTest.set('Cookie', Cookie)
-      .set('x-csrf-token', x_csrf_token)
+  if(option.token && option.token !== '') {
+    chaiTest.set('Authorization', option.token)
+  }
+
+  if(option.header) {
+    option.header.map(function(header, idx) {
+      console.log('custom header ==> ', header.attribute, header.value)
+      chaiTest.set(header.attribute, header.value)
+    })
   }
 
   if(option.query) {
-    ChaiTest.query(option.query)
+    chaiTest.query(option.query)
   }
 
-  return ChaiTest
+  if(option.method == 'get') {
+    return chaiTest
+  }
+
+  return chaiTest.send(payload)
 }
 
 //Parental Control
@@ -227,17 +252,14 @@ const getCsrfToken = () =>
 module.exports = {
   loginWithCredentials,
   getProfile,
-  updateProfile,
   ageRating,
   addDevice,
   getPlaylistRoot,
   getPlaylistByLanguage,
-  checkGeoguard,
   getUserLanguage,
   getUiLanguage,
   getUserDataPreferencesLanguage,
   getSubscriptionsPackageByPlatformId,
-  getAppParamsByPlatformId,
   postMethod,
   getMethod,
   deleteMethod,
@@ -246,5 +268,7 @@ module.exports = {
   getVideoId,
   signUp,
   getCsrfToken,
-  deletePin
+  deletePin,
+  updateProfile,
+  apiRequest
 }

@@ -49,5 +49,18 @@ describe('Parental Control', () => {
           
       expect(response.status).to.equal(200)
     })
+
+    // it('Update Profile - [PATCH] /accounts/_/v2/profile', async() => {
+    //   option = {
+    //     path: '',
+    //     method: 'get' || 'post' || 'put' ,....
+    //     token: auth.auth_token,
+    //     header: if need bentuk array, []
+    //     query: if need bentuk Object, {}
+    //   }
+
+    //   response =  await apiRequest(option, payload) --> payload jika butuh
+    //   assertiions
+    // })
   })
 })
