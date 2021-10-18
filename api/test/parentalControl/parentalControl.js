@@ -30,7 +30,7 @@ describe('Parental Control', () => {
           console.log("    * Response Body: " + util.inspect(response.body,{depth: null, colors: true}) + "\n");
         }
       }
-      // console.log("    * Response Body: " + util.inspect(response.body,{depth: null, colors: true}) + "\n");
+      console.log("    * Response Body: " + util.inspect(response.body,{depth: null, colors: true}) + "\n");
     })
 
     it('Get age limit - [GET] /api/v2/userdata/parental-control', async() => {
@@ -39,8 +39,16 @@ describe('Parental Control', () => {
         token: auth.auth_token,
         path: '/api/v2/userdata/parental-control'
       }
-      const response =  await apiRequest(option).then(res => res)
+      response =  await apiRequest(option).then(res => res)
+      
       expect(response.status).to.equal(200)
+      expect(response.body).to.be.a('object')
+      expect(response.body.data).to.be.a('object')
+      expect(response.body.data).to.have.key('type','id', 'attributes')
+      expect(response.body.data.type).to.be.a('string')
+      expect(response.body.data.type).to.equal('parental_control')
+      expect(response.body.data.id).to.be.a('string')
+      expect(response.body.data.attributes).to.be.a('object')
     })
   
     it('User can update age limit and parental pin - [POST] /api/v2/userdata/parental-control', async() => {
@@ -57,6 +65,9 @@ describe('Parental Control', () => {
       response =  await apiRequest(option, payload).then(res => res)
 
       expect(response.status).to.equal(200)
+      expect(response.body).to.be.a('object')
+      expect(response.body.data).to.be.a('string')
+      expect(response.body.data).to.equal('OK')
     })
   })
 })
