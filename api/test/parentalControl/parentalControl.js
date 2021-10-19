@@ -30,7 +30,6 @@ describe('Parental Control', () => {
           console.log("    * Response Body: " + util.inspect(response.body,{depth: null, colors: true}) + "\n");
         }
       }
-      console.log("    * Response Body: " + util.inspect(response.body,{depth: null, colors: true}) + "\n");
     })
 
     it('Get age limit - [GET] /api/v2/userdata/parental-control', async() => {

@@ -12,7 +12,7 @@ const expect = chai.expect
 const { apiRequest } = require('../../common/apiRequest');
 
 describe('GET app-params', () => { 
-  describe('GET] /api/v2/config/app-params?platformId={platformId}', () => {
+  describe('[GET] /api/v2/config/app-params?platformId={platformId}', () => {
     afterEach(function(){
       if(process.env.DEBUG_MODE == 'true') {
         if (this.currentTest.state == 'failed') { 

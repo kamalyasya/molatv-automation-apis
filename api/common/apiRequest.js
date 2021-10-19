@@ -249,6 +249,12 @@ const getCsrfToken = () =>
   .get('/accounts/_/v2/__csrf')
   .set('Content-Type', 'application/json')
 
+const logToConsole = (messages) => {
+  if(process.env.DEBUG_MODE == 'true') {
+    console.log(messages)
+  }
+}
+
 module.exports = {
   loginWithCredentials,
   getProfile,
@@ -270,5 +276,6 @@ module.exports = {
   getCsrfToken,
   deletePin,
   updateProfile,
-  apiRequest
+  apiRequest,
+  logToConsole
 }
