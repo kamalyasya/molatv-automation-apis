@@ -1,6 +1,6 @@
 const env = require('dotenv').config();
 const fs = require('fs');
-const { loginWithCredentials } = require('./apiRequest')
+const { loginWithCredentials, logToConsole } = require('./apiRequest')
 // const email = process.env.ACCOUNT_KAMAL_EMAIL
 // const password = process.env.ACCOUNT_KAMAL_PASSWORD
 // const email = process.env.ACCOUNT_CINCIN_EMAIL
@@ -43,7 +43,7 @@ const getTokenAndSave = async () => {
       const expiredAt = new Date().getTime() + (response.body.expires_in * 60);
       response.body.expired_at = expiredAt;
       response.body.email = email;
-      console.log({
+      logToConsole({
         state: 'get token call',
         // token: response.body
       })
@@ -61,7 +61,7 @@ const initateToken = () => {
       const fileToken = fs.readFileSync(TOKEN_FILE, 'utf8');
       const token = JSON.parse(fileToken);
       if (email != token.email || token.expired_at < new Date().getTime()) {
-        console.log({
+        logToConsole({
           state: 'expired call to new token',
           // token
         })

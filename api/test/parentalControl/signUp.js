@@ -8,7 +8,7 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { signUp } = require('../../common/apiRequest');
+const { signUp, logToConsole } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
 const country = process.env.npm_config_country
 
@@ -38,9 +38,7 @@ describe('Sign Up', () => {
         payload.birthdate = "1990-01-01"
       }
 
-      if (process.env.DEBUG_MODE) {
-        console.log(payload)
-      }
+      logToConsole(payload)
       response = await signUp(payload).then(res => res)
 
       expect(response.status).to.equal(200)
@@ -62,9 +60,7 @@ describe('Sign Up', () => {
 
         }
 
-        if (process.env.DEBUG_MODE) {
-          console.log(payload)
-        }
+        logToConsole(payload)
         response = await signUp(payload).then(res => res)
 
         expect(response.status).to.equal(200)
@@ -88,9 +84,7 @@ describe('Sign Up', () => {
           payload.birthdate = "2010-01-01"
         }
 
-        if (process.env.DEBUG_MODE) {
-          console.log(payload)
-        }
+        logToConsole(payload)
         response = await signUp(payload).then(res => res)
 
         expect(response.status).to.equal(200)
