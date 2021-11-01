@@ -31,3 +31,9 @@ require('../test/parentalControl/videos')
 
 // Subscriptions
 require('../test/subscriptions/getSubscriptionsPackage')
+
+// Test Cases
+// require('../test/testCases/renewToken')
+
+// Search
+require('../test/search/searchVod')

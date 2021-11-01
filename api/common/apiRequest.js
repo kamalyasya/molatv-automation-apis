@@ -180,7 +180,12 @@ const deleteMethod = (option, payload) => {
 }
 
 const apiRequest = (option, payload) => {
-  let chaiTest = chai.request(process.env.HOST)
+  let chaiTest
+  if (option.host && option.host !== '') {
+    chaiTest = chai.request(option.host)
+  } else {
+    chaiTest = chai.request(process.env.HOST)
+  }
 
   if (option.method == 'get') {
     chaiTest = chaiTest.get(option.path)
@@ -255,6 +260,13 @@ const logToConsole = (messages) => {
   }
 }
 
+function sleep(delayInSecond) {
+    logToConsole("--- Sleep Started ---")
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + (1000*delayInSecond));
+    logToConsole("--- Sleep Finished ---")
+}
+
 module.exports = {
   loginWithCredentials,
   getProfile,
@@ -277,5 +289,6 @@ module.exports = {
   deletePin,
   updateProfile,
   apiRequest,
-  logToConsole
+  logToConsole,
+  sleep
 }
