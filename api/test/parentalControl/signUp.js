@@ -8,9 +8,13 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { signUp, logToConsole } = require('../../common/apiRequest');
+const { logToConsole, apiRequest } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
 const country = process.env.npm_config_country
+
+const Cookie  ='_csrf='+process.env._csrf
+const x_csrf_token = process.env.x_csrf_token
+
 
 describe('Sign Up', () => {
   describe('Sign Up ', () => {
@@ -39,7 +43,22 @@ describe('Sign Up', () => {
       }
 
       logToConsole(payload)
-      response = await signUp(payload).then(res => res)
+
+      option = {
+        method: 'post',
+        path: '/api/v2/accounts/signup/email',
+        header: [
+          {
+            attribute: 'Cookie',
+            value: Cookie
+          },
+          {
+            attribute: 'x-csrf-token',
+            value: x_csrf_token
+          }
+        ]
+      }
+      response = await apiRequest(option, payload).then(res => res)
 
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -61,7 +80,22 @@ describe('Sign Up', () => {
         }
 
         logToConsole(payload)
-        response = await signUp(payload).then(res => res)
+
+        option = {
+          method: 'post',
+          path: '/api/v2/accounts/signup/email',
+          header: [
+            {
+              attribute: 'Cookie',
+              value: Cookie
+            },
+            {
+              attribute: 'x-csrf-token',
+              value: x_csrf_token
+            }
+          ]
+        }
+        response = await apiRequest(option, payload).then(res => res)
 
         expect(response.status).to.equal(200)
         expect(response.body).to.be.a('object')
@@ -85,7 +119,22 @@ describe('Sign Up', () => {
         }
 
         logToConsole(payload)
-        response = await signUp(payload).then(res => res)
+
+        option = {
+          method: 'post',
+          path: '/api/v2/accounts/signup/email',
+          header: [
+            {
+              attribute: 'Cookie',
+              value: Cookie
+            },
+            {
+              attribute: 'x-csrf-token',
+              value: x_csrf_token
+            }
+          ]
+        }
+        response = await apiRequest(option, payload).then(res => res)
 
         expect(response.status).to.equal(200)
         expect(response.body).to.be.a('object')

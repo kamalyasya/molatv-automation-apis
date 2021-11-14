@@ -6,7 +6,7 @@ const chai = require('chai')
 chai.use(require('chai-json-schema'))
 chai.use(chaiHttp)
 
-const { ageRating} = require('../../common/apiRequest');
+const { apiRequest } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
 
 const expect = chai.expect
@@ -33,8 +33,11 @@ describe('Parental Control', () => {
     })
 
     it('Get ageRating - [GET] /api/v2/videos/age-rating/country', async() => {
-      
-      response =  await ageRating().then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/videos/age-rating/country',
+      }
+      response =  await apiRequest(option).then(res => res)
           
       expect(response.status).to.equal(200)
     })

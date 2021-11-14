@@ -7,7 +7,7 @@ chai.use(require('chai-json-schema'))
 chai.use(require('chai-things'));
 chai.use(chaiHttp)
 
-const { getMethod, postMethod, deletePin } = require('../../common/apiRequest');
+const { apiRequest } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
 
 const expect = chai.expect
@@ -37,7 +37,12 @@ describe('Parental Control', () => {
       payload = {
         "userIds": [process.env.ACCOUNT_HBO_USERID]
       }
-      response =  await deletePin(auth.auth_token, payload).then(res => res)
+      option = {
+        method: 'delete',
+        path: '/api/v2/userdata/pin?app_id=molatv',
+        token: auth.auth_token,
+      }
+      response =  await apiRequest(option, payload).then(res => res)
 
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -47,11 +52,12 @@ describe('Parental Control', () => {
 
     it('Get Info PIN - [GET] /userdata/pin/info', async() => {
       option = {
+        method: 'get',
         token: auth.auth_token,
         path: '/api/v2/userdata/pin/info'
       }
       
-      response =  await getMethod(option).then(res => res)
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -72,11 +78,12 @@ describe('Parental Control', () => {
       }
 
       option = {
+        method: 'post',
         token: auth.auth_token,
         path: '/api/v2/userdata/setPin'
       }
 
-      response =  await postMethod(option, payload).then(res => res)      
+      response =  await apiRequest(option, payload).then(res => res)      
       expect(response.status).to.be.oneOf([200, 409]);
       expect(response.body).to.be.a('object')
 
@@ -95,11 +102,12 @@ describe('Parental Control', () => {
       }
 
       option = {
+        method: 'post',
         token: auth.auth_token,
         path: '/api/v2/userdata/checkPin'
       }
 
-      response =  await postMethod(option, payload).then(res => res)
+      response =  await apiRequest(option, payload).then(res => res)
 
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -114,11 +122,12 @@ describe('Parental Control', () => {
       }
 
       option = {
+        method: 'post',
         token: auth.auth_token,
         path: '/api/v2/userdata/changePin'
       }
 
-      response =  await postMethod(option, payload).then(res => res)
+      response =  await apiRequest(option, payload).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -132,11 +141,12 @@ describe('Parental Control', () => {
       }
 
       option = {
+        method: 'post',
         token: auth.auth_token,
         path: '/api/v2/userdata/forgotPin'
       }
       
-      response =  await postMethod(option, payload).then(res => res)
+      response =  await apiRequest(option, payload).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -159,11 +169,12 @@ describe('Parental Control', () => {
       } 
 
       option = {
+        method: 'post',
         token: auth.auth_token,
         path: '/api/v2/userdata/resetPin'
       }
 
-      response =  await postMethod(option, payload).then(res => res)
+      response =  await apiRequest(option, payload).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')

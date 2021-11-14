@@ -8,7 +8,7 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { getPlaylistRoot } = require('../../common/apiRequest');
+const { apiRequest } = require('../../common/apiRequest');
 
 describe('Multi country catalog', () => {
   describe('Get Playlist Root - [GET] /api/v2/videos/playlists-root', () => {
@@ -26,7 +26,13 @@ describe('Multi country catalog', () => {
   
     it('Get Playlist Root using Android Platform (1)', async() => {  
       platform_id = 1;
-      response =  await getPlaylistRoot(platform_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/videos/playlists-root',
+        query: {platformId: platform_id}
+      }
+
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -39,7 +45,13 @@ describe('Multi country catalog', () => {
   
     it('Get Playlist Root using MPS platform (4)', async() => {  
       platform_id = 4;
-      response =  await getPlaylistRoot(platform_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/videos/playlists-root',
+        query: {platformId: platform_id}
+      }
+
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -52,7 +64,14 @@ describe('Multi country catalog', () => {
   
     it('Get Playlist Root using Web Platform (7)', async() => {  
       platform_id = 7;
-      response =  await getPlaylistRoot(platform_id).then(res => res)
+      
+      option = {
+        method: 'get',
+        path: '/api/v2/videos/playlists-root',
+        query: {platformId: platform_id}
+      }
+
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -65,7 +84,14 @@ describe('Multi country catalog', () => {
   
     it('Get Playlist Root using iOS Platform (8)', async() => {  
       platform_id = 8;
-      response =  await getPlaylistRoot(platform_id).then(res => res)
+      
+      option = {
+        method: 'get',
+        path: '/api/v2/videos/playlists-root',
+        query: {platformId: platform_id}
+      }
+
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')

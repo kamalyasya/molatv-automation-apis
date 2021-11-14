@@ -8,7 +8,7 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { getVideoId, logToConsole } = require('../../common/apiRequest');
+const { getVideoId, logToConsole, apiRequest } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
 const schemaVideoId = require('../../data/videoId.json');
 const country = process.env.npm_config_country
@@ -72,11 +72,18 @@ describe('Parental Control', () => {
 
 
       logToConsole(
-          "video_id : "+video_id+
-          "\nlanguage_id : "+language_id
-        )
+        "video_id : "+video_id+
+        "\nlanguage_id : "+language_id
+      )
+
+      option = {
+        method: 'get',
+        path: '/api/v2/videos/'+video_id,
+        token: auth.auth_token,
+        query: {language: language_id}
+      }
       
-      response = await getVideoId(auth.auth_token, video_id, language_id).then(res => res)
+      response = await apiRequest(option).then(res => res)
 
       expect(response.status).to.equal(200)
       // expect(response.body).to.be.jsonSchema(schemaVideoId);

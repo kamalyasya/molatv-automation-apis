@@ -9,7 +9,7 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { getPlaylistByLanguage } = require('../../common/apiRequest');
+const { apiRequest } = require('../../common/apiRequest');
 describe('Multi country catalog', () => { 
   describe('Get Playlist data by Language - [GET] /api/v2/videos/playlists/{playlist_id}', () => {
     afterEach(function(){
@@ -27,7 +27,14 @@ describe('Multi country catalog', () => {
     it('Get Playlist data by Language - EN', async() => {  
       playlist_id = 'home-default'
       language = 'en'
-      response =  await getPlaylistByLanguage(playlist_id, language).then(res => res)
+
+      option = {
+        method: 'get',
+        path: '/api/v2/videos/playlists/' + playlist_id,
+        query: {language: language}
+      }
+
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')

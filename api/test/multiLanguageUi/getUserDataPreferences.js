@@ -9,7 +9,7 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { getUserDataPreferencesLanguage, getMethod } = require('../../common/apiRequest');
+const { apiRequest } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
 
 describe('Multi Language UI', () => { 
@@ -33,11 +33,12 @@ describe('Multi Language UI', () => {
   describe('Get User Preference Language - [GET] /api/v2/userdata/preferences/user-language?null=true/false', () => {  
     it('Get User Preference Language - null=true', async() => {
       option = {
+        method: 'get',
         token: auth.auth_token,
         path: '/api/v2/userdata/preferences/user-language',
         query: {null: true}
       }
-      response =  await getMethod(option).then(res => res)
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -47,8 +48,15 @@ describe('Multi Language UI', () => {
       expect(response.body.data.attributes).to.be.a('object')
       expect(response.body.data.attributes).to.have.keys('id', 'userId', 'userLanguage', 'userLanguageAndroid', 'projectId', 'status', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy')
     }),
+
     it('Get User Preference Language - null=false', async() => {  
-      response =  await getUserDataPreferencesLanguage(auth.auth_token, false).then(res => res)
+      option = {
+        method: 'get',
+        token: auth.auth_token,
+        path: '/api/v2/userdata/preferences/user-language',
+        query: {null: false}
+      }
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')

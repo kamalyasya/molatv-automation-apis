@@ -9,7 +9,7 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-const { getSubscriptionsPackageByPlatformId } = require('../../common/apiRequest');
+const { apiRequest } = require('../../common/apiRequest');
 
 describe('Subscriptions', () => { 
   describe('Get Subscriptions Package - [GET] /api/v2/subscriptions/subscriptions?platformId={platformId}', () => {
@@ -27,7 +27,12 @@ describe('Subscriptions', () => {
   
     it('Get Subscriptions Package Android platformId 1', async() => {  
       platform_id = 1
-      response =  await getSubscriptionsPackageByPlatformId(platform_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/subscriptions/subscriptions',
+        query: {platformId: platform_id}
+      }
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -39,7 +44,12 @@ describe('Subscriptions', () => {
 
     it('Get Subscriptions Package MPS platformId 4', async() => {  
       platform_id = 4
-      response =  await getSubscriptionsPackageByPlatformId(platform_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/subscriptions/subscriptions',
+        query: {platformId: platform_id}
+      }
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -51,7 +61,12 @@ describe('Subscriptions', () => {
 
     it('Get Subscriptions Package Web platformId 7', async() => {  
       platform_id = 7
-      response =  await getSubscriptionsPackageByPlatformId(platform_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/subscriptions/subscriptions',
+        query: {platformId: platform_id}
+      }
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')
@@ -63,7 +78,12 @@ describe('Subscriptions', () => {
 
     it('Get Subscriptions Package iOS platformId 8', async() => {  
       platform_id = 8
-      response =  await getSubscriptionsPackageByPlatformId(platform_id).then(res => res)
+      option = {
+        method: 'get',
+        path: '/api/v2/subscriptions/subscriptions',
+        query: {platformId: platform_id}
+      }
+      response =  await apiRequest(option).then(res => res)
       
       expect(response.status).to.equal(200)
       expect(response.body).to.be.a('object')

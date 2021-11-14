@@ -1,12 +1,16 @@
 const util = require('util')
+const env = require('dotenv').config();
 
 const chaiHttp = require('chai-http')
 const chai = require('chai')
 chai.use(require('chai-json-schema'))
 chai.use(chaiHttp)
 
-const { getProfile, updateProfile} = require('../../common/apiRequest');
+const { apiRequest } = require('../../common/apiRequest');
 const { getTokenFromFile } = require('../../common/getToken');
+
+const Cookie  ='_csrf='+process.env._csrf
+const x_csrf_token = process.env.x_csrf_token
 
 const expect = chai.expect
 
@@ -32,7 +36,12 @@ describe('Parental Control', () => {
     })
 
     it('Get Profile - [GET] /accounts/_/v2/profile', async() => {
-      response =  await getProfile(auth.auth_token)
+      option = {
+        method: 'get',
+        token: auth.auth_token,
+        path: '/accounts/_/v2/profile',
+      }
+      response =  await apiRequest(option).then(res => res)
           
       expect(response.status).to.equal(200)
     })
@@ -45,22 +54,25 @@ describe('Parental Control', () => {
         "location": "Indonesia"
       }
 
-      response =  await updateProfile(auth.auth_token, payload)
+      option = {
+        method: 'patch',
+        token: auth.auth_token,
+        path: '/accounts/_/v2/profile',
+        header: [
+          {
+            attribute: 'Cookie',
+            value: Cookie
+          },
+          {
+            attribute: 'x-csrf-token',
+            value: x_csrf_token
+          }
+        ]
+        
+      }
+      response =  await apiRequest(option, payload).then(res => res)
           
       expect(response.status).to.equal(200)
     })
-
-    // it('Update Profile - [PATCH] /accounts/_/v2/profile', async() => {
-    //   option = {
-    //     path: '',
-    //     method: 'get' || 'post' || 'put' ,....
-    //     token: auth.auth_token,
-    //     header: if need bentuk array, []
-    //     query: if need bentuk Object, {}
-    //   }
-
-    //   response =  await apiRequest(option, payload) --> payload jika butuh
-    //   assertiions
-    // })
   })
 })

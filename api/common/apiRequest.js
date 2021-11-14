@@ -20,78 +20,12 @@ const loginWithCredentials = (app_key, grant_type, scope, email, password) => {
     })
 }
 
-// age rating
-const ageRating = (payload) =>
-  chai.request(process.env.HOST)
-    .get('/api/v2/videos/age-rating/country')
-    .set('Content-Type', 'application/json')
-
-// profile
-const getProfile = (access_token) => {
-  return chai.request(process.env.HOST)
-    .get('/accounts/_/v2/profile')
-    .set('Authorization', access_token)
-}
-
-const updateProfile = (access_token, payload) => 
-  chai.request(process.env.HOST)
-    .patch('/accounts/_/v2/profile')
-    .set('Authorization', access_token)
-    .set('Cookie', Cookie)
-    .set('x-csrf-token', x_csrf_token)
-    .send(payload)
-
 // device
 const addDevice = (access_token, userId) =>
   chai.request(process.env.HOST)
     .get('/api/v2/videos/drm/add-device')
     .set('Authorization', access_token)
     .query({deviceId: userId, test: 1})
-
-// Playlist Root
-const getPlaylistRoot = (platform_id) =>
-chai.request(process.env.HOST)
-    .get('/api/v2/videos/playlists-root')
-    .query({platformId: platform_id})
-
-// Playlist Data by Playlist_id and Language
-const getPlaylistByLanguage = (playlist_id, language) =>
-chai.request(process.env.HOST)
-    .get('/api/v2/videos/playlists/' + playlist_id)
-    .query({language: language})
-
-//PIN
-const deletePin = (access_token, payload) =>
-  chai.request(process.env.HOST)
-    .delete('/api/v2/userdata/pin?app_id=molatv')
-    .set('Authorization', access_token)
-    .send(payload)
-
-// Multi Country Catalog
-const getUserLanguage = () => 
-  chai.request(process.env.HOST)
-    .get('/api/v2/config/languages')
-    .set('Content-Type', 'application/json')
-
-const getUiLanguage = (language, platform_id) => 
-  chai.request(process.env.HOST)
-    .get('/api/v2/config/ui/language/'+language)
-    .set('Content-Type', 'application/json')
-    .query({platformId: platform_id})
-
-const getUserDataPreferencesLanguage = (access_token, boolean_null) => 
-  chai.request(process.env.HOST)
-  .get('/api/v2/userdata/preferences/user-language')
-  .set('Content-Type', 'application/json')
-  .set('Authorization', access_token)
-  .query({null: boolean_null})
-
-// Subscriptions
-const getSubscriptionsPackageByPlatformId = (platform_id) => 
-  chai.request(process.env.HOST)
-  .get('/api/v2/subscriptions/subscriptions')
-  .set('Content-Type', 'application/json')
-  .query({platformId: platform_id})
 
 
 // Main function
@@ -221,26 +155,6 @@ const apiRequest = (option, payload) => {
   return chaiTest.send(payload)
 }
 
-//Parental Control
-const getParentalControl = () => 
-  chai.request(process.env.HOST)
-    .get('/api/v2/userdata/parental-control')
-
-const getVideoId = (access_token, video_id, language_id) => 
-  chai.request(process.env.HOST)
-  .get('/api/v2/videos/' + video_id)
-  .set('Content-Type', 'application/json')
-  .set('Authorization', access_token)
-  .query({language: language_id})
-
-const signUp = (payload) => 
-  chai.request(process.env.HOST)
-  .post('/api/v2/accounts/signup/email')
-  .set('content-type', 'application/json')
-  .set('x-csrf-token', x_csrf_token)
-  .set('Cookie', Cookie)
-  .send(payload)
-
 const signUpVerify = (payload) => 
   chai.request(process.env.HOST)
   .post('/api/v2/accounts/signup/email/verify')
@@ -269,25 +183,12 @@ function sleep(delayInSecond) {
 
 module.exports = {
   loginWithCredentials,
-  getProfile,
-  ageRating,
   addDevice,
-  getPlaylistRoot,
-  getPlaylistByLanguage,
-  getUserLanguage,
-  getUiLanguage,
-  getUserDataPreferencesLanguage,
-  getSubscriptionsPackageByPlatformId,
   postMethod,
   getMethod,
   deleteMethod,
   editMethod,
-  getParentalControl,
-  getVideoId,
-  signUp,
   getCsrfToken,
-  deletePin,
-  updateProfile,
   apiRequest,
   logToConsole,
   sleep
