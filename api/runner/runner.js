@@ -5,35 +5,35 @@ console.log("============================================")
 console.log("Running On \nHOST       : "+HOST+" \nCountry    : "+country)
 console.log("============================================")
 
-// require('../test/login_test')
+require('../test/login_test')
 
-// // Config
-// require('../test/config/configCountryFeatures')
-// require('../test/config/getAppParamsByPlatformId')
+// Config
+require('../test/config/configCountryFeatures')
+require('../test/config/getAppParamsByPlatformId')
 
-// // Multi Country Catalog
-// require('../test/multiCountryCatalog/geoguardCheck')
-// require('../test/multiCountryCatalog/playlistIdByLanguage')
-// require('../test/multiCountryCatalog/playlistRoot')
+// Multi Country Catalog
+require('../test/multiCountryCatalog/geoguardCheck')
+require('../test/multiCountryCatalog/playlistIdByLanguage')
+require('../test/multiCountryCatalog/playlistRoot')
 
-// // Multi Language UI
-// require('../test/multiLanguageUi/getUiLanguage')
-// require('../test/multiLanguageUi/getUserDataPreferences')
-// require('../test/multiLanguageUi/getUserLanguage')
+// Multi Language UI
+require('../test/multiLanguageUi/getUiLanguage')
+require('../test/multiLanguageUi/getUserDataPreferences')
+require('../test/multiLanguageUi/getUserLanguage')
 
-// // Parental Control
-// require('../test/parentalControl/parentalControl')
-// require('../test/parentalControl/ageRating')
-// require('../test/parentalControl/profile')
+// Parental Control
+require('../test/parentalControl/parentalControl')
+require('../test/parentalControl/ageRating')
+require('../test/parentalControl/profile')
 require('../test/parentalControl/signUp')
-// require('../test/parentalControl/userPin')
-// require('../test/parentalControl/videos')
+require('../test/parentalControl/userPin')
+require('../test/parentalControl/videos')
 
-// // Subscriptions
-// require('../test/subscriptions/getSubscriptionsPackage')
+// Subscriptions
+require('../test/subscriptions/getSubscriptionsPackage')
 
-// // Test Cases
-// // require('../test/testCases/renewToken')
+// Test Cases
+require('../test/testCases/renewToken')
 
-// // Search
-// require('../test/search/searchVod')
+// Search
+require('../test/search/searchVod')
